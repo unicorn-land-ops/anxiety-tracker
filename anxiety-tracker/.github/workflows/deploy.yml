@@ -19,15 +19,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Determine working directory
+        id: set-dir
+        run: |
+          if [ -f "package-lock.json" ]; then
+            echo "dir=." >> $GITHUB_OUTPUT
+          elif [ -f "anxiety-tracker/package-lock.json" ]; then
+            echo "dir=anxiety-tracker" >> $GITHUB_OUTPUT
+          else
+            echo "ERROR: package-lock.json not found"
+            ls -la
+            exit 1
+          fi
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
       - name: Install dependencies
+        working-directory: ${{ steps.set-dir.outputs.dir }}
         run: npm ci
       
       - name: Build
+        working-directory: ${{ steps.set-dir.outputs.dir }}
         run: npm run build
       
       - name: Setup Pages
@@ -36,7 +51,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ${{ steps.set-dir.outputs.dir }}/dist
       
       - name: Deploy to GitHub Pages
         id: deployment
