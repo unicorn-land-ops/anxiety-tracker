@@ -2,57 +2,73 @@ import { Question } from '../types';
 
 export const leavingQuestions: Question[] = [
   {
-    id: 'leaving-1',
-    text: 'How much anxiety are you noticing right now?',
+    id: 'leaving-bathroom',
+    text: 'Bathroom prep?',
     scenario: 'leaving',
+    type: 'boolean',
   },
   {
-    id: 'leaving-2',
-    text: 'How unprepared do you feel for what lies ahead?',
+    id: 'leaving-stomach',
+    text: 'Empty stomach?',
     scenario: 'leaving',
+    type: 'boolean',
   },
   {
-    id: 'leaving-3',
-    text: 'How much anticipatory dread are you experiencing?',
+    id: 'leaving-toilet',
+    text: 'Toilet urge?',
     scenario: 'leaving',
+    type: 'scale3',
   },
   {
-    id: 'leaving-4',
-    text: 'How worried are you that things might not go well?',
+    id: 'leaving-familiar',
+    text: 'Familiar destination?',
     scenario: 'leaving',
-  },
-  {
-    id: 'leaving-5',
-    text: 'How strong is the pull to stay home instead?',
-    scenario: 'leaving',
+    type: 'boolean',
   },
 ];
 
 export const outQuestions: Question[] = [
   {
-    id: 'out-1',
-    text: 'How much anxiety are you noticing in this moment?',
+    id: 'out-stomach',
+    text: 'Empty stomach?',
     scenario: 'out',
+    type: 'boolean',
   },
   {
-    id: 'out-2',
-    text: 'How uneasy do you feel in your current surroundings?',
+    id: 'out-crowded',
+    text: 'Crowded?',
     scenario: 'out',
+    type: 'boolean',
   },
   {
-    id: 'out-3',
-    text: 'How strong is the urge to return home?',
+    id: 'out-stress',
+    text: 'Stress level?',
     scenario: 'out',
+    type: 'scale3',
   },
   {
-    id: 'out-4',
-    text: 'How difficult is it to manage your anxiety right now?',
+    id: 'out-familiar',
+    text: 'Familiar place?',
     scenario: 'out',
+    type: 'boolean',
   },
   {
-    id: 'out-5',
-    text: 'How overwhelmed are you feeling?',
+    id: 'out-focus',
+    text: 'Focus level?',
     scenario: 'out',
+    type: 'scale3',
+  },
+  {
+    id: 'out-anxiety',
+    text: 'Anxiety level?',
+    scenario: 'out',
+    type: 'scale3',
+  },
+  {
+    id: 'out-toilet',
+    text: 'Toilet urge?',
+    scenario: 'out',
+    type: 'scale3',
   },
 ];
 

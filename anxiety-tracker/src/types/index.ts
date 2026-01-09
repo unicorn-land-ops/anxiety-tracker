@@ -1,14 +1,17 @@
 export type Scenario = 'leaving' | 'out';
 
+export type QuestionType = 'boolean' | 'scale3';
+
 export interface Question {
   id: string;
   text: string;
   scenario: Scenario;
+  type: QuestionType;
 }
 
 export interface QuestionResponse {
   questionId: string;
-  value: number;
+  value: boolean | number;
 }
 
 export interface AnxietyEntry {

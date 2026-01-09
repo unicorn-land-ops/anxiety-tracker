@@ -8,6 +8,13 @@ interface Props {
   onExport: () => void;
 }
 
+function formatValue(value: boolean | number, type: 'boolean' | 'scale3'): string {
+  if (type === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+  return `${value}/3`;
+}
+
 export function History({ entries, onBack, onExport }: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -51,9 +58,6 @@ export function History({ entries, onBack, onExport }: Props) {
         <div className="entry-list">
           {sortedEntries.map((entry) => {
             const questions = getQuestionsForScenario(entry.scenario);
-            const avgScore =
-              entry.responses.reduce((sum, r) => sum + r.value, 0) /
-              entry.responses.length;
             const isExpanded = expandedId === entry.id;
 
             return (
@@ -71,24 +75,24 @@ export function History({ entries, onBack, onExport }: Props) {
                       {entry.scenario === 'leaving' ? 'Heading out' : 'Out'} · {entry.locationType}
                     </span>
                   </div>
-                  <div className="entry-score">
-                    <span className="score-value">{avgScore.toFixed(1)}</span>
-                    <span className="score-label">avg</span>
+                  <div className="entry-expand-icon">
+                    {isExpanded ? '−' : '+'}
                   </div>
                 </button>
 
                 {isExpanded && (
                   <div className="entry-details">
-                    {entry.responses.map((response, index) => {
+                    {entry.responses.map((response) => {
                       const question = questions.find(
                         (q) => q.id === response.questionId
                       );
+                      if (!question) return null;
                       return (
                         <div key={response.questionId} className="detail-row">
-                          <span className="detail-question">
-                            {index + 1}. {question?.text}
+                          <span className="detail-question">{question.text}</span>
+                          <span className="detail-value">
+                            {formatValue(response.value, question.type)}
                           </span>
-                          <span className="detail-value">{response.value}/5</span>
                         </div>
                       );
                     })}

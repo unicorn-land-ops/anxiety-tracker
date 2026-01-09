@@ -7,10 +7,15 @@ interface Props {
   onViewHistory: () => void;
 }
 
+function formatValue(value: boolean | number, type: 'boolean' | 'scale3'): string {
+  if (type === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+  return `${value}/3`;
+}
+
 export function Summary({ entry, onDone, onViewHistory }: Props) {
   const questions = getQuestionsForScenario(entry.scenario);
-  const avgScore =
-    entry.responses.reduce((sum, r) => sum + r.value, 0) / entry.responses.length;
 
   return (
     <div className="summary">
@@ -30,22 +35,19 @@ export function Summary({ entry, onDone, onViewHistory }: Props) {
           <span className="label">Location</span>
           <span className="value">{entry.locationType}</span>
         </div>
-        <div className="detail-row">
-          <span className="label">Average</span>
-          <span className="value">{avgScore.toFixed(1)} / 5</span>
-        </div>
       </div>
 
       <div className="summary-responses">
         <h3>Your responses</h3>
-        {entry.responses.map((response, index) => {
+        {entry.responses.map((response) => {
           const question = questions.find((q) => q.id === response.questionId);
+          if (!question) return null;
           return (
             <div key={response.questionId} className="response-row">
-              <span className="response-question">
-                {index + 1}. {question?.text}
+              <span className="response-question">{question.text}</span>
+              <span className="response-value">
+                {formatValue(response.value, question.type)}
               </span>
-              <span className="response-value">{response.value}/5</span>
             </div>
           );
         })}

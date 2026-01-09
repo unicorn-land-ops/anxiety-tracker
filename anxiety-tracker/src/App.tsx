@@ -3,7 +3,7 @@ import { AppView, Scenario, QuestionResponse, AnxietyEntry } from './types';
 import { useStorage } from './hooks/useStorage';
 import { ScenarioSelector } from './components/ScenarioSelector';
 import { LocationPicker } from './components/LocationPicker';
-import { QuestionFlow } from './components/QuestionFlow';
+import { QuestionPanel } from './components/QuestionPanel';
 import { Summary } from './components/Summary';
 import { History } from './components/History';
 import { ExportSettings } from './components/ExportSettings';
@@ -71,7 +71,7 @@ function App() {
       )}
 
       {view === 'questions' && currentScenario && (
-        <QuestionFlow
+        <QuestionPanel
           scenario={currentScenario}
           onComplete={handleQuestionsComplete}
           onBack={() => setView('location')}
