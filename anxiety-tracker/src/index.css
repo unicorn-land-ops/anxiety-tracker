@@ -756,17 +756,66 @@ body {
   gap: 12px;
 }
 
+.entry-card-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.entry-delete-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  background: linear-gradient(to left, #D32F2F, #C62828);
+  z-index: 1;
+}
+
+.delete-reveal-btn {
+  color: white;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s ease;
+}
+
+.delete-reveal-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.delete-reveal-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 .entry-card {
+  position: relative;
   background: var(--card);
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
   transition: all 0.3s ease;
+  z-index: 2;
+  user-select: none;
+  touch-action: pan-y;
 }
 
 .entry-card:hover {
   box-shadow: var(--shadow-md);
+}
+
+.entry-card.swiping {
+  cursor: grabbing;
 }
 
 .entry-summary {
@@ -947,6 +996,105 @@ body {
     --border: rgba(61, 59, 57, 0.3);
     --border-strong: rgba(61, 59, 57, 0.5);
   }
+}
+
+/* ========================
+   CONFIRMATION MODAL
+   ======================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 59, 57, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  animation: slideUp 0.3s ease-out;
+}
+
+.modal-content h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.modal-content p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.modal-content p strong {
+  color: var(--sage-dark);
+  font-weight: 600;
+}
+
+.modal-warning {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-cancel,
+.modal-delete {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.modal-cancel {
+  background: var(--cream-dark);
+  color: var(--text);
+}
+
+.modal-cancel:hover {
+  background: var(--border);
+}
+
+.modal-delete {
+  background: #D32F2F;
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.modal-delete:hover {
+  background: #C62828;
+  box-shadow: var(--shadow-md);
+}
+
+.modal-delete:active {
+  transform: scale(0.98);
 }
 
 /* Reduced motion preference */

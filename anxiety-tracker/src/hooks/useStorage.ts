@@ -64,11 +64,20 @@ export function useStorage() {
     [exportToJson]
   );
 
+  const deleteEntry = useCallback((entryId: string) => {
+    setEntries((prev) => {
+      const updated = prev.filter((entry) => entry.id !== entryId);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
+
   return {
     entries,
     saveEntry,
     getEntriesForExport,
     exportToJson,
     copyToClipboard,
+    deleteEntry,
   };
 }

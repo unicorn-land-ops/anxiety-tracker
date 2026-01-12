@@ -14,7 +14,7 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState<string | null>(null);
   const [lastEntry, setLastEntry] = useState<AnxietyEntry | null>(null);
 
-  const { entries, saveEntry, getEntriesForExport, copyToClipboard } = useStorage();
+  const { entries, saveEntry, getEntriesForExport, copyToClipboard, deleteEntry } = useStorage();
 
   const handleScenarioSelect = (scenario: Scenario) => {
     setCurrentScenario(scenario);
@@ -91,6 +91,7 @@ function App() {
           entries={entries}
           onBack={resetFlow}
           onExport={() => setView('settings')}
+          onDelete={deleteEntry}
         />
       )}
 

@@ -2,26 +2,32 @@ import { Question } from '../types';
 
 export const leavingQuestions: Question[] = [
   {
-    id: 'leaving-bathroom',
+    id: 'leaving-bathroom-routine',
     text: 'Bathroom prep?',
     scenario: 'leaving',
     type: 'boolean',
   },
   {
-    id: 'leaving-stomach',
+    id: 'leaving-empty-stomach',
     text: 'Empty stomach?',
     scenario: 'leaving',
     type: 'boolean',
   },
   {
-    id: 'leaving-toilet',
+    id: 'leaving-toilet-urge',
     text: 'Toilet urge?',
     scenario: 'leaving',
     type: 'scale3',
   },
   {
-    id: 'leaving-familiar',
+    id: 'leaving-familiar-destination',
     text: 'Familiar destination?',
+    scenario: 'leaving',
+    type: 'boolean',
+  },
+  {
+    id: 'leaving-lemon-squirt',
+    text: 'Lemon squirt?',
     scenario: 'leaving',
     type: 'boolean',
   },
@@ -29,46 +35,52 @@ export const leavingQuestions: Question[] = [
 
 export const outQuestions: Question[] = [
   {
-    id: 'out-stomach',
+    id: 'out-empty-stomach',
     text: 'Empty stomach?',
     scenario: 'out',
     type: 'boolean',
   },
   {
-    id: 'out-crowded',
+    id: 'out-is-crowded',
     text: 'Crowded?',
     scenario: 'out',
     type: 'boolean',
   },
   {
-    id: 'out-stress',
+    id: 'out-stress-level',
     text: 'Stress level?',
     scenario: 'out',
     type: 'scale3',
   },
   {
-    id: 'out-familiar',
+    id: 'out-familiar-location',
     text: 'Familiar place?',
     scenario: 'out',
     type: 'boolean',
   },
   {
-    id: 'out-focus',
+    id: 'out-focus-level',
     text: 'Focus level?',
     scenario: 'out',
     type: 'scale3',
   },
   {
-    id: 'out-anxiety',
+    id: 'out-anxiety-level',
     text: 'Anxiety level?',
     scenario: 'out',
     type: 'scale3',
   },
   {
-    id: 'out-toilet',
+    id: 'out-toilet-urge',
     text: 'Toilet urge?',
     scenario: 'out',
     type: 'scale3',
+  },
+  {
+    id: 'out-lemon-squirt',
+    text: 'Lemon squirt?',
+    scenario: 'out',
+    type: 'boolean',
   },
 ];
 
