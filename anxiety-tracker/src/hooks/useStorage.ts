@@ -26,8 +26,9 @@ export function useStorage() {
   }, []);
 
   const getEntriesForExport = useCallback(
-    (range: 'week' | 'month' | 'all'): AnxietyEntry[] => {
+    (range: 'week' | 'month' | 'all' | 'undownloaded'): AnxietyEntry[] => {
       if (range === 'all') return entries;
+      if (range === 'undownloaded') return entries.filter((entry) => !entry.downloaded);
 
       const now = new Date();
       const cutoff = new Date();
@@ -44,24 +45,37 @@ export function useStorage() {
   );
 
   const exportToJson = useCallback(
-    (range: 'week' | 'month' | 'all'): string => {
+    (range: 'week' | 'month' | 'all' | 'undownloaded'): string => {
       const data = getEntriesForExport(range);
       return JSON.stringify(data, null, 2);
     },
     [getEntriesForExport]
   );
 
+  const markEntriesAsDownloaded = useCallback((entryIds: string[]) => {
+    setEntries((prev) => {
+      const updated = prev.map((entry) =>
+        entryIds.includes(entry.id) ? { ...entry, downloaded: true } : entry
+      );
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
+
   const copyToClipboard = useCallback(
-    async (range: 'week' | 'month' | 'all'): Promise<boolean> => {
+    async (range: 'week' | 'month' | 'all' | 'undownloaded'): Promise<boolean> => {
       try {
-        const json = exportToJson(range);
+        const entriesToExport = getEntriesForExport(range);
+        const json = JSON.stringify(entriesToExport, null, 2);
         await navigator.clipboard.writeText(json);
+        // Mark exported entries as downloaded
+        markEntriesAsDownloaded(entriesToExport.map((e) => e.id));
         return true;
       } catch {
         return false;
       }
     },
-    [exportToJson]
+    [getEntriesForExport, markEntriesAsDownloaded]
   );
 
   const deleteEntry = useCallback((entryId: string) => {

@@ -20,6 +20,7 @@ export interface AnxietyEntry {
   scenario: Scenario;
   locationType: string;
   responses: QuestionResponse[];
+  downloaded?: boolean;
 }
 
 export type AppView = 'home' | 'location' | 'questions' | 'summary' | 'history' | 'settings';

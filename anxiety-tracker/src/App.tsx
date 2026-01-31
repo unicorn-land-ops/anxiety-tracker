@@ -27,9 +27,13 @@ function App() {
   };
 
   const handleQuestionsComplete = (responses: QuestionResponse[]) => {
+    const now = new Date();
+    const localTimestamp = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(0, -1);
     const entry: AnxietyEntry = {
       id: crypto.randomUUID(),
-      timestamp: new Date().toISOString(),
+      timestamp: localTimestamp,
       scenario: currentScenario!,
       locationType: currentLocation!,
       responses,
@@ -51,6 +55,7 @@ function App() {
     week: getEntriesForExport('week').length,
     month: getEntriesForExport('month').length,
     all: entries.length,
+    undownloaded: getEntriesForExport('undownloaded').length,
   };
 
   return (

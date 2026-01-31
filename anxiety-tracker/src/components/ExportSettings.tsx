@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
 interface Props {
-  onCopyToClipboard: (range: 'week' | 'month' | 'all') => Promise<boolean>;
-  entryCounts: { week: number; month: number; all: number };
+  onCopyToClipboard: (range: 'week' | 'month' | 'all' | 'undownloaded') => Promise<boolean>;
+  entryCounts: { week: number; month: number; all: number; undownloaded: number };
   onBack: () => void;
 }
 
 export function ExportSettings({ onCopyToClipboard, entryCounts, onBack }: Props) {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
-  const handleCopy = async (range: 'week' | 'month' | 'all') => {
+  const handleCopy = async (range: 'week' | 'month' | 'all' | 'undownloaded') => {
     const success = await onCopyToClipboard(range);
     if (success) {
       setCopyStatus(`Copied ${entryCounts[range]} entries to clipboard`);
@@ -31,6 +31,11 @@ export function ExportSettings({ onCopyToClipboard, entryCounts, onBack }: Props
       </p>
 
       <div className="export-buttons">
+        <button className="export-option" onClick={() => handleCopy('undownloaded')}>
+          <span className="export-label">Undownloaded</span>
+          <span className="export-count">{entryCounts.undownloaded} entries</span>
+        </button>
+
         <button className="export-option" onClick={() => handleCopy('week')}>
           <span className="export-label">Past 7 days</span>
           <span className="export-count">{entryCounts.week} entries</span>

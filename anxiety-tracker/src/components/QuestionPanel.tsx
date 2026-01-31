@@ -62,7 +62,7 @@ export function QuestionPanel({ scenario, onComplete, onBack }: Props) {
               </div>
             ) : (
               <div className="scale-group">
-                {[1, 2, 3].map((value) => (
+                {[0, 1, 2, 3].map((value) => (
                   <button
                     key={value}
                     className={`scale-btn-sm ${answers[question.id] === value ? 'active' : ''}`}
