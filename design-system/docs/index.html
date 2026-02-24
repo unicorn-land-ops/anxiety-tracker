@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unicorn.Land Design System</title>
   <link rel="stylesheet" href="../css/unicorn-land.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -163,10 +166,207 @@
       font-size: var(--ul-text-subhead); border: none; cursor: pointer;
     }
 
+    /* Brand Identity */
+    .brand-identity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--ul-space-8);
+    }
+    .brand-card {
+      padding: var(--ul-space-8);
+      border-radius: var(--ul-radius-lg);
+      border: 1px solid var(--ul-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--ul-space-4);
+    }
+    .brand-card-label {
+      font-family: var(--ul-font-mono);
+      font-size: var(--ul-text-caption);
+      color: var(--ul-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .brand-card-desc {
+      font-size: var(--ul-text-subhead);
+      color: var(--ul-text-secondary);
+      text-align: center;
+      max-width: 280px;
+    }
+
+    /* Wordmark */
+    .wordmark {
+      font-family: 'Silkscreen', cursive;
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--ul-text);
+      position: relative;
+    }
+    .wordmark .dot {
+      color: var(--ul-accent);
+    }
+    .wordmark-shimmer {
+      font-family: 'Silkscreen', cursive;
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      background: linear-gradient(
+        90deg,
+        var(--ul-text) 0%,
+        var(--ul-text) 35%,
+        #56dbd0 45%,
+        #7ae8db 50%,
+        #56dbd0 55%,
+        var(--ul-text) 65%,
+        var(--ul-text) 100%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 100% 0; }
+      50% { background-position: -50% 0; }
+    }
+
+    /* Refracted Dot */
+    .refracted-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      position: relative;
+      background: var(--ul-accent);
+      overflow: hidden;
+    }
+    .refracted-dot::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: conic-gradient(
+        from 200deg,
+        transparent 0deg,
+        rgba(122, 232, 219, 0.6) 30deg,
+        rgba(86, 219, 208, 0.9) 60deg,
+        rgba(174, 234, 224, 0.4) 90deg,
+        transparent 120deg
+      );
+      animation: refract 6s linear infinite;
+    }
+    .refracted-dot::after {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      width: 70%;
+      height: 70%;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 35% 35%,
+        rgba(255,255,255,0.6),
+        transparent 60%
+      );
+    }
+    @keyframes refract {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .refracted-dot-sm {
+      width: 24px;
+      height: 24px;
+    }
+    .refracted-dot-lg {
+      width: 64px;
+      height: 64px;
+    }
+
+    /* Favicon preview */
+    .favicon-preview {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--ul-radius-sm);
+      background: var(--ul-bg-surface);
+      border: 1px solid var(--ul-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .favicon-preview .refracted-dot {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Badge */
+    .made-in-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ul-space-2);
+      padding: var(--ul-space-1-5) var(--ul-space-4);
+      border-radius: var(--ul-radius-full);
+      border: 1px solid var(--ul-border);
+      background: var(--ul-bg-surface);
+      font-family: var(--ul-font-sans);
+      font-size: var(--ul-text-caption);
+      font-weight: 500;
+      color: var(--ul-text-secondary);
+      letter-spacing: 0.01em;
+    }
+    .made-in-badge .refracted-dot {
+      width: 12px;
+      height: 12px;
+    }
+    .made-in-badge span {
+      font-family: 'Silkscreen', cursive;
+      font-size: 10px;
+      color: var(--ul-text);
+    }
+
+    /* Dark background variant cards */
+    .brand-card-dark {
+      background: var(--ul-stone-900, #1c1917);
+      border-color: var(--ul-stone-700, #44403c);
+    }
+    .brand-card-dark .wordmark,
+    .brand-card-dark .brand-card-label,
+    .brand-card-dark .brand-card-desc {
+      color: var(--ul-stone-50, #fafaf9);
+    }
+    .brand-card-dark .wordmark-shimmer {
+      background: linear-gradient(
+        90deg,
+        #fafaf9 0%,
+        #fafaf9 35%,
+        #56dbd0 45%,
+        #7ae8db 50%,
+        #56dbd0 55%,
+        #fafaf9 65%,
+        #fafaf9 100%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    /* Wordmark sizes */
+    .wordmark-lg { font-size: 3rem; }
+    .wordmark-sm { font-size: 1.5rem; }
+
     @media (max-width: 768px) {
       header { flex-direction: column; gap: var(--ul-space-6); }
       .type-row { flex-direction: column; gap: var(--ul-space-1); }
       .swatch-color { width: 60px; height: 48px; }
+      .wordmark, .wordmark-shimmer { font-size: 1.75rem; }
+      .brand-identity-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -184,6 +384,96 @@
         <button class="btn" id="darkToggle" onclick="toggleDark(this)">Dark Mode</button>
       </div>
     </header>
+
+    <!-- Brand Identity -->
+    <section>
+      <h2>Brand Identity</h2>
+
+      <div class="group">
+        <h3>Wordmark</h3>
+        <div class="brand-identity-grid">
+          <div class="brand-card">
+            <span class="brand-card-label">Primary — Static</span>
+            <div class="wordmark">UNICORN<span class="dot">.</span>LAND</div>
+            <span class="brand-card-desc">Silkscreen with Opal period. Default for most contexts.</span>
+          </div>
+          <div class="brand-card">
+            <span class="brand-card-label">Primary — Shimmer</span>
+            <div class="wordmark-shimmer">UNICORN.LAND</div>
+            <span class="brand-card-desc">Holographic opal shimmer. For hero moments and interactive contexts.</span>
+          </div>
+          <div class="brand-card brand-card-dark">
+            <span class="brand-card-label">Reversed — Shimmer</span>
+            <div class="wordmark-shimmer">UNICORN.LAND</div>
+            <span class="brand-card-desc">On dark backgrounds. Silver at rest, opal at shimmer peak.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>The Refracted Dot</h3>
+        <div class="brand-identity-grid">
+          <div class="brand-card">
+            <span class="brand-card-label">Standalone Mark</span>
+            <div style="display:flex;align-items:center;gap:var(--ul-space-6)">
+              <div class="refracted-dot-lg refracted-dot"></div>
+              <div class="refracted-dot"></div>
+              <div class="refracted-dot refracted-dot-sm"></div>
+            </div>
+            <span class="brand-card-desc">The period from the wordmark, evolved. A dot that refracts light — making the invisible visible in 16px.</span>
+          </div>
+          <div class="brand-card">
+            <span class="brand-card-label">Favicon / App Icon</span>
+            <div style="display:flex;align-items:center;gap:var(--ul-space-4)">
+              <div class="favicon-preview"><div class="refracted-dot"></div></div>
+              <div style="width:48px;height:48px;border-radius:var(--ul-radius-lg);background:var(--ul-bg-surface);border:1px solid var(--ul-border);display:flex;align-items:center;justify-content:center"><div class="refracted-dot" style="width:32px;height:32px"></div></div>
+              <div style="width:64px;height:64px;border-radius:14px;background:var(--ul-bg-surface);border:1px solid var(--ul-border);display:flex;align-items:center;justify-content:center"><div class="refracted-dot" style="width:44px;height:44px"></div></div>
+            </div>
+            <span class="brand-card-desc">Favicon (16px), Tab icon (32px), App icon (64px). The dot scales cleanly.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>Made in Unicorn.Land Badge</h3>
+        <div class="brand-identity-grid">
+          <div class="brand-card">
+            <span class="brand-card-label">Default Badge</span>
+            <div class="made-in-badge">
+              <div class="refracted-dot"></div>
+              <span>Made in UNICORN.LAND</span>
+            </div>
+            <span class="brand-card-desc">For sub-product footers, about screens, and marketing. The dot + Silkscreen wordmark at caption scale.</span>
+          </div>
+          <div class="brand-card brand-card-dark">
+            <span class="brand-card-label">Dark Variant</span>
+            <div class="made-in-badge" style="border-color:var(--ul-stone-700,#44403c);background:var(--ul-stone-800,#292524)">
+              <div class="refracted-dot"></div>
+              <span style="color:var(--ul-stone-50,#fafaf9)">Made in UNICORN.LAND</span>
+            </div>
+            <span class="brand-card-desc">For dark-themed sub-products (Simple Tarot, Family Dashboard).</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>Wordmark Sizes</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--ul-space-6);align-items:flex-start">
+          <div>
+            <span class="brand-card-label">Large (Hero)</span>
+            <div class="wordmark wordmark-lg" style="margin-top:var(--ul-space-2)">UNICORN<span class="dot">.</span>LAND</div>
+          </div>
+          <div>
+            <span class="brand-card-label">Default</span>
+            <div class="wordmark" style="margin-top:var(--ul-space-2)">UNICORN<span class="dot">.</span>LAND</div>
+          </div>
+          <div>
+            <span class="brand-card-label">Small (Nav / Footer)</span>
+            <div class="wordmark wordmark-sm" style="margin-top:var(--ul-space-2)">UNICORN<span class="dot">.</span>LAND</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Color Palette -->
     <section>
