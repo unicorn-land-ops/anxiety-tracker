@@ -53,6 +53,57 @@
   --text-footnote: 0.8125rem;
   --text-caption: 0.75rem;
 
+  /* --- Font Weights --- */
+  --font-weight-display: 600;
+  --font-weight-headline: 600;
+  --font-weight-title-lg: 500;
+  --font-weight-title: 500;
+  --font-weight-body-lg: 400;
+  --font-weight-body: 400;
+  --font-weight-callout: 500;
+  --font-weight-subhead: 500;
+  --font-weight-footnote: 400;
+  --font-weight-caption: 400;
+
+  /* --- Line Heights --- */
+  --leading-display: 1.1;
+  --leading-headline: 1.15;
+  --leading-title-lg: 1.2;
+  --leading-title: 1.25;
+  --leading-body-lg: 1.6;
+  --leading-body: 1.6;
+  --leading-callout: 1.5;
+  --leading-subhead: 1.5;
+  --leading-footnote: 1.45;
+  --leading-caption: 1.4;
+
+  /* --- Letter Spacing --- */
+  --tracking-display: -0.02em;
+  --tracking-headline: -0.015em;
+  --tracking-title-lg: -0.01em;
+  --tracking-title: -0.005em;
+  --tracking-body-lg: 0em;
+  --tracking-body: 0em;
+  --tracking-callout: 0em;
+  --tracking-subhead: 0.01em;
+  --tracking-footnote: 0.01em;
+  --tracking-caption: 0.02em;
+
+  /* --- Spacing --- */
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+
   /* --- Border Radii --- */
   --radius-xs: 2px;
   --radius-sm: 4px;

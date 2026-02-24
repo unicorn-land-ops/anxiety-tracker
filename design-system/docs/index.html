@@ -181,7 +181,7 @@
         <p class="desc">Shared design DNA across all Unicorn.Land projects.</p>
       </div>
       <div class="controls">
-        <button class="btn" id="darkToggle" onclick="document.documentElement.classList.toggle('dark')">Dark Mode</button>
+        <button class="btn" id="darkToggle" onclick="toggleDark(this)">Dark Mode</button>
       </div>
     </header>
 
@@ -340,6 +340,10 @@
   </div>
 
   <script>
+    function toggleDark(btn) {
+      document.documentElement.classList.toggle('dark');
+      btn.classList.toggle('active');
+    }
     function setTheme(theme, btn) {
       if (theme) {
         document.documentElement.setAttribute('data-theme', theme);
