@@ -1,0 +1,184 @@
+/* ============================================
+   Unicorn.Land Design System v1.0.0
+   "Making the invisible visible"
+   ============================================ */
+
+/* --- Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* --- Color Tokens --- */
+:root {
+  /* Opal scale */
+  --ul-opal-50: #eefbf8;
+  --ul-opal-100: #d5f5ef;
+  --ul-opal-200: #aeeae0;
+  --ul-opal-300: #7adace;
+  --ul-opal-400: #56dbd0;
+  --ul-opal-500: #2fb8ad;
+  --ul-opal-600: #0d9488;
+  --ul-opal-700: #0a7a70;
+  --ul-opal-800: #0c5f59;
+  --ul-opal-900: #134e4a;
+
+  /* Stone neutrals */
+  --ul-stone-50: #fafaf9;
+  --ul-stone-100: #f5f5f4;
+  --ul-stone-200: #e7e5e4;
+  --ul-stone-300: #d6d3d1;
+  --ul-stone-400: #a8a29e;
+  --ul-stone-500: #78716c;
+  --ul-stone-600: #57534e;
+  --ul-stone-700: #44403c;
+  --ul-stone-800: #292524;
+  --ul-stone-900: #1c1917;
+
+  /* Semantic */
+  --ul-success: #16a34a;
+  --ul-warning: #ca8a04;
+  --ul-error: #dc2626;
+  --ul-info: #0d9488;
+
+  /* Semantic aliases (what projects actually use) */
+  --ul-accent: var(--ul-opal-400);
+  --ul-accent-hover: var(--ul-opal-500);
+  --ul-accent-functional: var(--ul-opal-600);
+  --ul-accent-contrast: var(--ul-opal-900);
+  --ul-bg: var(--ul-stone-50);
+  --ul-bg-surface: var(--ul-stone-100);
+  --ul-border: var(--ul-stone-200);
+  --ul-text: var(--ul-stone-900);
+  --ul-text-secondary: var(--ul-stone-500);
+  --ul-text-muted: var(--ul-stone-400);
+
+  /* Typography */
+  --ul-font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --ul-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Font sizes */
+  --ul-text-display: 3rem;
+  --ul-text-headline: 2.25rem;
+  --ul-text-title-lg: 1.75rem;
+  --ul-text-title: 1.375rem;
+  --ul-text-body-lg: 1.125rem;
+  --ul-text-body: 1rem;
+  --ul-text-callout: 1rem;
+  --ul-text-subhead: 0.875rem;
+  --ul-text-footnote: 0.8125rem;
+  --ul-text-caption: 0.75rem;
+
+  /* Font weights */
+  --ul-weight-display: 600;
+  --ul-weight-headline: 600;
+  --ul-weight-title-lg: 500;
+  --ul-weight-title: 500;
+  --ul-weight-body-lg: 400;
+  --ul-weight-body: 400;
+  --ul-weight-callout: 500;
+  --ul-weight-subhead: 500;
+  --ul-weight-footnote: 400;
+  --ul-weight-caption: 400;
+
+  /* Line heights */
+  --ul-leading-display: 1.1;
+  --ul-leading-headline: 1.15;
+  --ul-leading-title-lg: 1.2;
+  --ul-leading-title: 1.25;
+  --ul-leading-body-lg: 1.6;
+  --ul-leading-body: 1.6;
+  --ul-leading-callout: 1.5;
+  --ul-leading-subhead: 1.5;
+  --ul-leading-footnote: 1.45;
+  --ul-leading-caption: 1.4;
+
+  /* Letter spacing */
+  --ul-tracking-display: -0.02em;
+  --ul-tracking-headline: -0.015em;
+  --ul-tracking-title-lg: -0.01em;
+  --ul-tracking-title: -0.005em;
+  --ul-tracking-body-lg: 0;
+  --ul-tracking-body: 0;
+  --ul-tracking-callout: 0;
+  --ul-tracking-subhead: 0.01em;
+  --ul-tracking-footnote: 0.01em;
+  --ul-tracking-caption: 0.02em;
+
+  /* Spacing */
+  --ul-space-0-5: 2px;
+  --ul-space-1: 4px;
+  --ul-space-1-5: 6px;
+  --ul-space-2: 8px;
+  --ul-space-3: 12px;
+  --ul-space-4: 16px;
+  --ul-space-6: 24px;
+  --ul-space-8: 32px;
+  --ul-space-10: 40px;
+  --ul-space-12: 48px;
+  --ul-space-16: 64px;
+  --ul-space-24: 96px;
+  --ul-space-32: 128px;
+
+  /* Radii */
+  --ul-radius-xs: 2px;
+  --ul-radius-sm: 4px;
+  --ul-radius-md: 6px;
+  --ul-radius-lg: 8px;
+  --ul-radius-xl: 12px;
+  --ul-radius-full: 9999px;
+
+  /* Shadows */
+  --ul-shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
+  --ul-shadow-sm: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+  --ul-shadow-md: 0 4px 6px rgba(28, 25, 23, 0.06), 0 2px 4px rgba(28, 25, 23, 0.04);
+  --ul-shadow-lg: 0 10px 15px rgba(28, 25, 23, 0.06), 0 4px 6px rgba(28, 25, 23, 0.04);
+  --ul-shadow-xl: 0 20px 25px rgba(28, 25, 23, 0.08), 0 8px 10px rgba(28, 25, 23, 0.04);
+  --ul-shadow-glow: 0 0 20px rgba(86, 219, 208, 0.25);
+}
+
+/* --- Dark Mode (auto) --- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --ul-bg: var(--ul-stone-900);
+    --ul-bg-surface: var(--ul-stone-800);
+    --ul-border: var(--ul-stone-700);
+    --ul-text: var(--ul-stone-100);
+    --ul-text-secondary: var(--ul-stone-400);
+    --ul-text-muted: var(--ul-stone-500);
+  }
+}
+
+/* --- Dark Mode (manual class) --- */
+.dark {
+  --ul-bg: var(--ul-stone-900);
+  --ul-bg-surface: var(--ul-stone-800);
+  --ul-border: var(--ul-stone-700);
+  --ul-text: var(--ul-stone-100);
+  --ul-text-secondary: var(--ul-stone-400);
+  --ul-text-muted: var(--ul-stone-500);
+}
+
+/* --- Product Theme Overrides --- */
+[data-theme="blo"] {
+  --ul-accent: #D4A853;
+  --ul-accent-hover: #c49a45;
+  --ul-accent-functional: #b8941f;
+  --ul-accent-contrast: #6b4e10;
+}
+
+[data-theme="simple-tarot"] {
+  --ul-accent: #E6C266;
+  --ul-accent-hover: #d4b058;
+  --ul-accent-functional: #b8941f;
+  --ul-bg: #1a1a2e;
+  --ul-bg-surface: #16213e;
+  --ul-text: #ffffff;
+  --ul-text-secondary: rgba(255, 255, 255, 0.7);
+  --ul-border: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="sanctuary"] {
+  --ul-accent: #8B9A7D;
+  --ul-accent-hover: #7d8b6f;
+  --ul-accent-functional: #6B7A5D;
+  --ul-bg: #FAF7F2;
+  --ul-text: #3D3B39;
+}
