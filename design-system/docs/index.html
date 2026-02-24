@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicorn.Land Design System</title>
+  <link rel="stylesheet" href="../css/unicorn-land.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--ul-font-sans);
+      font-size: var(--ul-text-body);
+      font-weight: var(--ul-weight-body);
+      line-height: var(--ul-leading-body);
+      color: var(--ul-text);
+      background: var(--ul-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: var(--ul-space-8) var(--ul-space-6); }
+
+    /* Header */
+    header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: var(--ul-space-16); border-bottom: 1px solid var(--ul-border);
+      margin-bottom: var(--ul-space-16);
+    }
+    header .brand h1 {
+      font-size: var(--ul-text-display); font-weight: var(--ul-weight-display);
+      line-height: var(--ul-leading-display); letter-spacing: var(--ul-tracking-display);
+      color: var(--ul-accent);
+    }
+    header .brand p.subtitle {
+      font-size: var(--ul-text-title); font-weight: var(--ul-weight-title);
+      color: var(--ul-text-secondary); margin-top: var(--ul-space-2);
+    }
+    header .brand p.desc {
+      font-size: var(--ul-text-body); color: var(--ul-text-muted);
+      margin-top: var(--ul-space-1);
+    }
+    header .controls { display: flex; gap: var(--ul-space-3); flex-shrink: 0; margin-top: var(--ul-space-2); }
+
+    /* Buttons */
+    .btn {
+      font-family: var(--ul-font-sans); font-size: var(--ul-text-subhead);
+      font-weight: var(--ul-weight-callout); padding: var(--ul-space-2) var(--ul-space-4);
+      border-radius: var(--ul-radius-md); border: 1px solid var(--ul-border);
+      background: var(--ul-bg-surface); color: var(--ul-text); cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { border-color: var(--ul-accent); color: var(--ul-accent); }
+    .btn.active { background: var(--ul-accent); color: #fff; border-color: var(--ul-accent); }
+
+    /* Sections */
+    section { margin-bottom: var(--ul-space-16); }
+    section h2 {
+      font-size: var(--ul-text-headline); font-weight: var(--ul-weight-headline);
+      line-height: var(--ul-leading-headline); letter-spacing: var(--ul-tracking-headline);
+      margin-bottom: var(--ul-space-8);
+    }
+    section h3 {
+      font-size: var(--ul-text-title); font-weight: var(--ul-weight-title);
+      margin-bottom: var(--ul-space-4); color: var(--ul-text-secondary);
+    }
+    .group { margin-bottom: var(--ul-space-10); }
+
+    /* Swatches */
+    .swatches { display: flex; flex-wrap: wrap; gap: var(--ul-space-3); }
+    .swatch {
+      display: flex; flex-direction: column; align-items: center; gap: var(--ul-space-1-5);
+    }
+    .swatch-color {
+      width: 80px; height: 64px; border-radius: var(--ul-radius-md);
+      border: 1px solid var(--ul-border); position: relative;
+    }
+    .swatch-label {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-secondary); text-align: center;
+    }
+    .swatch-hex {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-muted); text-align: center;
+    }
+    .swatch-badge {
+      position: absolute; top: -8px; right: -8px;
+      font-family: var(--ul-font-mono); font-size: 10px; font-weight: 600;
+      background: var(--ul-accent); color: #fff;
+      padding: 1px 5px; border-radius: var(--ul-radius-full);
+    }
+
+    /* Typography */
+    .type-row {
+      display: flex; align-items: baseline; gap: var(--ul-space-6);
+      padding: var(--ul-space-4) 0; border-bottom: 1px solid var(--ul-border);
+    }
+    .type-sample { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .type-spec {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-muted); white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* Spacing */
+    .space-row {
+      display: flex; align-items: center; gap: var(--ul-space-4);
+      margin-bottom: var(--ul-space-3);
+    }
+    .space-bar {
+      height: 24px; background: var(--ul-accent); border-radius: var(--ul-radius-sm);
+      opacity: 0.8;
+    }
+    .space-label {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-secondary); min-width: 120px; flex-shrink: 0;
+    }
+
+    /* Radii */
+    .radii-grid { display: flex; flex-wrap: wrap; gap: var(--ul-space-6); }
+    .radius-card {
+      width: 120px; height: 120px; background: var(--ul-bg-surface);
+      border: 2px solid var(--ul-accent); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: var(--ul-space-1);
+    }
+    .radius-card span:first-child {
+      font-weight: var(--ul-weight-callout); font-size: var(--ul-text-subhead);
+    }
+    .radius-card span:last-child {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-muted);
+    }
+
+    /* Shadows */
+    .shadow-grid { display: flex; flex-wrap: wrap; gap: var(--ul-space-6); }
+    .shadow-card {
+      width: 160px; height: 120px; background: var(--ul-bg-surface);
+      border-radius: var(--ul-radius-lg); display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: var(--ul-space-1);
+    }
+    .shadow-card span:first-child {
+      font-weight: var(--ul-weight-callout); font-size: var(--ul-text-subhead);
+    }
+    .shadow-card span:last-child {
+      font-family: var(--ul-font-mono); font-size: var(--ul-text-caption);
+      color: var(--ul-text-muted);
+    }
+
+    /* Theme demo */
+    .theme-buttons { display: flex; flex-wrap: wrap; gap: var(--ul-space-3); margin-bottom: var(--ul-space-6); }
+    .theme-demo {
+      max-width: 360px; padding: var(--ul-space-6);
+      background: var(--ul-bg-surface); border-radius: var(--ul-radius-lg);
+      box-shadow: var(--ul-shadow-sm); border: 1px solid var(--ul-border);
+    }
+    .theme-demo h4 {
+      font-size: var(--ul-text-title); font-weight: var(--ul-weight-title);
+      color: var(--ul-accent); margin-bottom: var(--ul-space-2);
+    }
+    .theme-demo p { color: var(--ul-text-secondary); font-size: var(--ul-text-subhead); margin-bottom: var(--ul-space-4); }
+    .theme-demo .demo-btn {
+      display: inline-block; padding: var(--ul-space-2) var(--ul-space-6);
+      background: var(--ul-accent); color: #fff; border-radius: var(--ul-radius-md);
+      font-family: var(--ul-font-sans); font-weight: var(--ul-weight-callout);
+      font-size: var(--ul-text-subhead); border: none; cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; gap: var(--ul-space-6); }
+      .type-row { flex-direction: column; gap: var(--ul-space-1); }
+      .swatch-color { width: 60px; height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <h1>Unicorn.Land Design System</h1>
+        <p class="subtitle">Making the invisible visible.</p>
+        <p class="desc">Shared design DNA across all Unicorn.Land projects.</p>
+      </div>
+      <div class="controls">
+        <button class="btn" id="darkToggle" onclick="document.documentElement.classList.toggle('dark')">Dark Mode</button>
+      </div>
+    </header>
+
+    <!-- Color Palette -->
+    <section>
+      <h2>Color Palette</h2>
+
+      <div class="group">
+        <h3>Opal Scale</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-color" style="background:#eefbf8"></div><span class="swatch-label">opal-50</span><span class="swatch-hex">#eefbf8</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#d5f5ef"></div><span class="swatch-label">opal-100</span><span class="swatch-hex">#d5f5ef</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#aeeae0"></div><span class="swatch-label">opal-200</span><span class="swatch-hex">#aeeae0</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#7adace"></div><span class="swatch-label">opal-300</span><span class="swatch-hex">#7adace</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#56dbd0"><span class="swatch-badge">Signature</span></div><span class="swatch-label">opal-400</span><span class="swatch-hex">#56dbd0</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#2fb8ad"></div><span class="swatch-label">opal-500</span><span class="swatch-hex">#2fb8ad</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0d9488"><span class="swatch-badge">Functional</span></div><span class="swatch-label">opal-600</span><span class="swatch-hex">#0d9488</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0a7a70"></div><span class="swatch-label">opal-700</span><span class="swatch-hex">#0a7a70</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0c5f59"></div><span class="swatch-label">opal-800</span><span class="swatch-hex">#0c5f59</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#134e4a"><span class="swatch-badge">Contrast</span></div><span class="swatch-label">opal-900</span><span class="swatch-hex">#134e4a</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>Stone Neutrals</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-color" style="background:#fafaf9"></div><span class="swatch-label">stone-50</span><span class="swatch-hex">#fafaf9</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#f5f5f4"></div><span class="swatch-label">stone-100</span><span class="swatch-hex">#f5f5f4</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#e7e5e4"></div><span class="swatch-label">stone-200</span><span class="swatch-hex">#e7e5e4</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#d6d3d1"></div><span class="swatch-label">stone-300</span><span class="swatch-hex">#d6d3d1</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#a8a29e"></div><span class="swatch-label">stone-400</span><span class="swatch-hex">#a8a29e</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#78716c"></div><span class="swatch-label">stone-500</span><span class="swatch-hex">#78716c</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#57534e"></div><span class="swatch-label">stone-600</span><span class="swatch-hex">#57534e</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#44403c"></div><span class="swatch-label">stone-700</span><span class="swatch-hex">#44403c</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#292524"></div><span class="swatch-label">stone-800</span><span class="swatch-hex">#292524</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#1c1917"></div><span class="swatch-label">stone-900</span><span class="swatch-hex">#1c1917</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <h3>Semantic Colors</h3>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-color" style="background:#16a34a"></div><span class="swatch-label">success</span><span class="swatch-hex">#16a34a</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#ca8a04"></div><span class="swatch-label">warning</span><span class="swatch-hex">#ca8a04</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#dc2626"></div><span class="swatch-label">error</span><span class="swatch-hex">#dc2626</span></div>
+          <div class="swatch"><div class="swatch-color" style="background:#0d9488"></div><span class="swatch-label">info</span><span class="swatch-hex">#0d9488</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section>
+      <h2>Typography</h2>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:3rem;font-weight:600;line-height:1.1;letter-spacing:-0.02em">Making the invisible visible</span>
+        <span class="type-spec">Display &mdash; 48px / 600 / 1.1 / -0.02em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:2.25rem;font-weight:600;line-height:1.15;letter-spacing:-0.015em">Making the invisible visible</span>
+        <span class="type-spec">Headline &mdash; 36px / 600 / 1.15 / -0.015em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:1.75rem;font-weight:500;line-height:1.2;letter-spacing:-0.01em">Making the invisible visible</span>
+        <span class="type-spec">Title LG &mdash; 28px / 500 / 1.2 / -0.01em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:1.375rem;font-weight:500;line-height:1.25;letter-spacing:-0.005em">Making the invisible visible</span>
+        <span class="type-spec">Title &mdash; 22px / 500 / 1.25 / -0.005em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:1.125rem;font-weight:400;line-height:1.6;letter-spacing:0">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Body LG &mdash; 18px / 400 / 1.6 / 0</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:1rem;font-weight:400;line-height:1.6;letter-spacing:0">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Body &mdash; 16px / 400 / 1.6 / 0</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:1rem;font-weight:500;line-height:1.5;letter-spacing:0">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Callout &mdash; 16px / 500 / 1.5 / 0</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:0.875rem;font-weight:500;line-height:1.5;letter-spacing:0.01em">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Subhead &mdash; 14px / 500 / 1.5 / 0.01em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:0.8125rem;font-weight:400;line-height:1.45;letter-spacing:0.01em">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Footnote &mdash; 13px / 400 / 1.45 / 0.01em</span>
+      </div>
+      <div class="type-row">
+        <span class="type-sample" style="font-size:0.75rem;font-weight:400;line-height:1.4;letter-spacing:0.02em">The quick brown fox jumps over the lazy dog</span>
+        <span class="type-spec">Caption &mdash; 12px / 400 / 1.4 / 0.02em</span>
+      </div>
+    </section>
+
+    <!-- Spacing -->
+    <section>
+      <h2>Spacing</h2>
+      <div class="space-row"><span class="space-label">space-0.5 &middot; 2px</span><div class="space-bar" style="width:2px"></div></div>
+      <div class="space-row"><span class="space-label">space-1 &middot; 4px</span><div class="space-bar" style="width:4px"></div></div>
+      <div class="space-row"><span class="space-label">space-1.5 &middot; 6px</span><div class="space-bar" style="width:6px"></div></div>
+      <div class="space-row"><span class="space-label">space-2 &middot; 8px</span><div class="space-bar" style="width:8px"></div></div>
+      <div class="space-row"><span class="space-label">space-3 &middot; 12px</span><div class="space-bar" style="width:12px"></div></div>
+      <div class="space-row"><span class="space-label">space-4 &middot; 16px</span><div class="space-bar" style="width:16px"></div></div>
+      <div class="space-row"><span class="space-label">space-6 &middot; 24px</span><div class="space-bar" style="width:24px"></div></div>
+      <div class="space-row"><span class="space-label">space-8 &middot; 32px</span><div class="space-bar" style="width:32px"></div></div>
+      <div class="space-row"><span class="space-label">space-10 &middot; 40px</span><div class="space-bar" style="width:40px"></div></div>
+      <div class="space-row"><span class="space-label">space-12 &middot; 48px</span><div class="space-bar" style="width:48px"></div></div>
+      <div class="space-row"><span class="space-label">space-16 &middot; 64px</span><div class="space-bar" style="width:64px"></div></div>
+      <div class="space-row"><span class="space-label">space-24 &middot; 96px</span><div class="space-bar" style="width:96px"></div></div>
+      <div class="space-row"><span class="space-label">space-32 &middot; 128px</span><div class="space-bar" style="width:128px"></div></div>
+    </section>
+
+    <!-- Radii -->
+    <section>
+      <h2>Border Radii</h2>
+      <div class="radii-grid">
+        <div class="radius-card" style="border-radius:2px"><span>xs</span><span>2px</span></div>
+        <div class="radius-card" style="border-radius:4px"><span>sm</span><span>4px</span></div>
+        <div class="radius-card" style="border-radius:6px"><span>md</span><span>6px</span></div>
+        <div class="radius-card" style="border-radius:8px"><span>lg</span><span>8px</span></div>
+        <div class="radius-card" style="border-radius:12px"><span>xl</span><span>12px</span></div>
+        <div class="radius-card" style="border-radius:9999px"><span>full</span><span>9999px</span></div>
+      </div>
+    </section>
+
+    <!-- Shadows -->
+    <section>
+      <h2>Shadows</h2>
+      <div class="shadow-grid">
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-xs)"><span>xs</span><span>Subtle</span></div>
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-sm)"><span>sm</span><span>Default</span></div>
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-md)"><span>md</span><span>Raised</span></div>
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-lg)"><span>lg</span><span>Overlay</span></div>
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-xl)"><span>xl</span><span>Modal</span></div>
+        <div class="shadow-card" style="box-shadow:var(--ul-shadow-glow)"><span>glow</span><span>Opal glow</span></div>
+      </div>
+    </section>
+
+    <!-- Product Themes -->
+    <section>
+      <h2>Product Themes</h2>
+      <div class="theme-buttons">
+        <button class="btn active" onclick="setTheme(null, this)">Default</button>
+        <button class="btn" onclick="setTheme('blo', this)">BLO</button>
+        <button class="btn" onclick="setTheme('simple-tarot', this)">Simple Tarot</button>
+        <button class="btn" onclick="setTheme('sanctuary', this)">Sanctuary</button>
+      </div>
+      <div class="theme-demo">
+        <h4>Sample Card</h4>
+        <p>This card adapts to the active product theme, reflecting changes in accent color, background, and text.</p>
+        <button class="demo-btn">Action</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function setTheme(theme, btn) {
+      if (theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      document.querySelectorAll('.theme-buttons .btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
