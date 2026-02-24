@@ -61,8 +61,8 @@ Not a startup, not an agency — an atelier. A small workshop making exceptional
 
 **Variants:**
 1. **Static** — Silkscreen in near-black (`#1c1917`), period in Opal (`#56dbd0`).
-2. **Shimmer** — Holographic opal shimmer animation. Silver/near-black at rest, sweeps through opal-teal with a subtle hint of prismatic color at the shimmer peak. 4-second cycle, ease-in-out. For hero moments and interactive contexts.
-3. **Reversed** — On dark backgrounds. White (`#fafaf9`) at rest, opal at shimmer peak.
+2. **Rainbow** — Smooth flowing rainbow gradient shimmer. A `linear-gradient` at 300% size panning across the text on a 6-second ease cycle. Colors: opal, blue, purple, pink, gold, green, back to opal. The signature treatment for hero moments and interactive contexts.
+3. **Reversed** — Same rainbow flow on dark backgrounds. The gradient carries its own light.
 4. **Monochrome** — All near-black or all white. For contexts where color isn't available.
 
 **Sizes:**
@@ -77,7 +77,7 @@ Not a startup, not an agency — an atelier. A small workshop making exceptional
 
 The standalone geometric mark. The period from the wordmark, evolved.
 
-**Concept:** A circle in Opal (`#56dbd0`) with a subtle conic-gradient refraction — light rotating across the surface, suggesting hidden color being revealed. It's "making the invisible visible" as a mark.
+**Concept:** A circle with the same smooth flowing rainbow gradient as the wordmark — holographic, shifting through opal, blue, purple, pink, gold, green on a 6-second cycle. A soft radial highlight gives it dimensionality. The wordmark and dot are the same holographic material.
 
 **Sizes:**
 - 12px — Badge context
@@ -86,7 +86,7 @@ The standalone geometric mark. The period from the wordmark, evolved.
 - 48px — Default standalone
 - 64px — App icon / large display
 
-**Scales cleanly.** The refraction effect simplifies at small sizes to just the Opal circle with a highlight.
+**Scales cleanly.** At very small sizes (favicon, 16px), the gradient simplifies to a radial opal-to-blue highlight.
 
 **Usage:** Favicon, app icon for the Unicorn.Land portfolio site, social media avatar, "Made in Unicorn.Land" badge, and any context where the full wordmark doesn't fit.
 

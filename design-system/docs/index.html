@@ -207,75 +207,70 @@
     .wordmark .dot {
       color: var(--ul-accent);
     }
-    .wordmark-shimmer {
+    /* Rainbow shimmer wordmark — smooth flowing gradient */
+    .wordmark-rainbow {
       font-family: 'Silkscreen', cursive;
       font-size: 2.5rem;
       font-weight: 400;
       letter-spacing: 0.02em;
       background: linear-gradient(
         90deg,
-        var(--ul-text) 0%,
-        var(--ul-text) 35%,
-        #56dbd0 45%,
-        #7ae8db 50%,
-        #56dbd0 55%,
-        var(--ul-text) 65%,
-        var(--ul-text) 100%
+        #56dbd0,
+        #64b5f6,
+        #ba68c8,
+        #f0a4c8,
+        #e8c170,
+        #81c784,
+        #56dbd0
       );
-      background-size: 250% 100%;
+      background-size: 300% 100%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 4s ease-in-out infinite;
+      animation: rainbow-flow 6s ease infinite;
     }
-    @keyframes shimmer {
-      0%, 100% { background-position: 100% 0; }
-      50% { background-position: -50% 0; }
+    @keyframes rainbow-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
-    /* Refracted Dot */
+    /* Holographic Dot — smooth rainbow gradient shift */
     .refracted-dot {
       width: 48px;
       height: 48px;
       border-radius: 50%;
       position: relative;
-      background: var(--ul-accent);
-      overflow: hidden;
-    }
-    .refracted-dot::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
-      background: conic-gradient(
-        from 200deg,
-        transparent 0deg,
-        rgba(122, 232, 219, 0.6) 30deg,
-        rgba(86, 219, 208, 0.9) 60deg,
-        rgba(174, 234, 224, 0.4) 90deg,
-        transparent 120deg
+      background: linear-gradient(
+        135deg,
+        #56dbd0,
+        #64b5f6,
+        #ba68c8,
+        #f0a4c8,
+        #e8c170,
+        #81c784,
+        #56dbd0
       );
-      animation: refract 6s linear infinite;
+      background-size: 300% 300%;
+      animation: holo-shift 6s ease infinite;
+      overflow: hidden;
     }
     .refracted-dot::after {
       content: '';
       position: absolute;
-      top: 15%;
-      left: 15%;
-      width: 70%;
-      height: 70%;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      height: 80%;
       border-radius: 50%;
       background: radial-gradient(
         circle at 35% 35%,
-        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.45),
         transparent 60%
       );
     }
-    @keyframes refract {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes holo-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .refracted-dot-sm {
@@ -339,23 +334,6 @@
     .brand-card-dark .brand-card-desc {
       color: var(--ul-stone-50, #fafaf9);
     }
-    .brand-card-dark .wordmark-shimmer {
-      background: linear-gradient(
-        90deg,
-        #fafaf9 0%,
-        #fafaf9 35%,
-        #56dbd0 45%,
-        #7ae8db 50%,
-        #56dbd0 55%,
-        #fafaf9 65%,
-        #fafaf9 100%
-      );
-      background-size: 250% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s ease-in-out infinite;
-    }
 
     /* Wordmark sizes */
     .wordmark-lg { font-size: 3rem; }
@@ -398,14 +376,14 @@
             <span class="brand-card-desc">Silkscreen with Opal period. Default for most contexts.</span>
           </div>
           <div class="brand-card">
-            <span class="brand-card-label">Primary — Shimmer</span>
-            <div class="wordmark-shimmer">UNICORN.LAND</div>
-            <span class="brand-card-desc">Holographic opal shimmer. For hero moments and interactive contexts.</span>
+            <span class="brand-card-label">Primary — Rainbow</span>
+            <div class="wordmark-rainbow">UNICORN.LAND</div>
+            <span class="brand-card-desc">Smooth flowing rainbow gradient shimmer. The signature treatment for hero moments.</span>
           </div>
           <div class="brand-card brand-card-dark">
-            <span class="brand-card-label">Reversed — Shimmer</span>
-            <div class="wordmark-shimmer">UNICORN.LAND</div>
-            <span class="brand-card-desc">On dark backgrounds. Silver at rest, opal at shimmer peak.</span>
+            <span class="brand-card-label">Reversed — Rainbow</span>
+            <div class="wordmark-rainbow">UNICORN.LAND</div>
+            <span class="brand-card-desc">Same rainbow flow on dark backgrounds. The gradient carries its own light.</span>
           </div>
         </div>
       </div>
@@ -420,7 +398,7 @@
               <div class="refracted-dot"></div>
               <div class="refracted-dot refracted-dot-sm"></div>
             </div>
-            <span class="brand-card-desc">The period from the wordmark, evolved. A dot that refracts light — making the invisible visible in 16px.</span>
+            <span class="brand-card-desc">The period from the wordmark, evolved. An opal dot with prismatic rainbow refraction — light scattering into color.</span>
           </div>
           <div class="brand-card">
             <span class="brand-card-label">Favicon / App Icon</span>
@@ -643,6 +621,7 @@
       document.querySelectorAll('.theme-buttons .btn').forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
     }
+
   </script>
 </body>
 </html>
