@@ -1,0 +1,11 @@
+{
+  "name": "@unicorn-land/design-system",
+  "version": "1.0.0",
+  "description": "Unicorn.Land shared design tokens, CSS properties, and Tailwind theme",
+  "private": true,
+  "exports": {
+    "./tokens": "./tokens/index.json",
+    "./css": "./css/unicorn-land.css",
+    "./tailwind": "./tailwind/theme.css"
+  }
+}

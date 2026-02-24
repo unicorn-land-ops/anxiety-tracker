@@ -1,0 +1,32 @@
+{
+  "opal": {
+    "50":  { "$value": "#eefbf8", "$type": "color" },
+    "100": { "$value": "#d5f5ef", "$type": "color" },
+    "200": { "$value": "#aeeae0", "$type": "color" },
+    "300": { "$value": "#7adace", "$type": "color" },
+    "400": { "$value": "#56dbd0", "$type": "color", "$description": "Signature — hero elements, brand moments" },
+    "500": { "$value": "#2fb8ad", "$type": "color", "$description": "Primary buttons, active states" },
+    "600": { "$value": "#0d9488", "$type": "color", "$description": "Functional — text links, focus rings (4.6:1 on white)" },
+    "700": { "$value": "#0a7a70", "$type": "color" },
+    "800": { "$value": "#0c5f59", "$type": "color" },
+    "900": { "$value": "#134e4a", "$type": "color", "$description": "High contrast text (9.5:1 on white)" }
+  },
+  "stone": {
+    "50":  { "$value": "#fafaf9", "$type": "color", "$description": "Page background" },
+    "100": { "$value": "#f5f5f4", "$type": "color" },
+    "200": { "$value": "#e7e5e4", "$type": "color" },
+    "300": { "$value": "#d6d3d1", "$type": "color" },
+    "400": { "$value": "#a8a29e", "$type": "color" },
+    "500": { "$value": "#78716c", "$type": "color" },
+    "600": { "$value": "#57534e", "$type": "color" },
+    "700": { "$value": "#44403c", "$type": "color" },
+    "800": { "$value": "#292524", "$type": "color" },
+    "900": { "$value": "#1c1917", "$type": "color", "$description": "Primary text" }
+  },
+  "semantic": {
+    "success": { "$value": "#16a34a", "$type": "color" },
+    "warning": { "$value": "#ca8a04", "$type": "color" },
+    "error":   { "$value": "#dc2626", "$type": "color" },
+    "info":    { "$value": "#0d9488", "$type": "color", "$description": "Reuses opal-600" }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "$description": "Unicorn.Land Design System Tokens v1.0.0",
+  "color": {
+    "opal": {
+      "50":  { "$value": "#eefbf8", "$type": "color" },
+      "100": { "$value": "#d5f5ef", "$type": "color" },
+      "200": { "$value": "#aeeae0", "$type": "color" },
+      "300": { "$value": "#7adace", "$type": "color" },
+      "400": { "$value": "#56dbd0", "$type": "color", "$description": "Signature — hero elements, brand moments" },
+      "500": { "$value": "#2fb8ad", "$type": "color", "$description": "Primary buttons, active states" },
+      "600": { "$value": "#0d9488", "$type": "color", "$description": "Functional — text links, focus rings (4.6:1 on white)" },
+      "700": { "$value": "#0a7a70", "$type": "color" },
+      "800": { "$value": "#0c5f59", "$type": "color" },
+      "900": { "$value": "#134e4a", "$type": "color", "$description": "High contrast text (9.5:1 on white)" }
+    },
+    "stone": {
+      "50":  { "$value": "#fafaf9", "$type": "color", "$description": "Page background" },
+      "100": { "$value": "#f5f5f4", "$type": "color" },
+      "200": { "$value": "#e7e5e4", "$type": "color" },
+      "300": { "$value": "#d6d3d1", "$type": "color" },
+      "400": { "$value": "#a8a29e", "$type": "color" },
+      "500": { "$value": "#78716c", "$type": "color" },
+      "600": { "$value": "#57534e", "$type": "color" },
+      "700": { "$value": "#44403c", "$type": "color" },
+      "800": { "$value": "#292524", "$type": "color" },
+      "900": { "$value": "#1c1917", "$type": "color", "$description": "Primary text" }
+    },
+    "semantic": {
+      "success": { "$value": "#16a34a", "$type": "color" },
+      "warning": { "$value": "#ca8a04", "$type": "color" },
+      "error":   { "$value": "#dc2626", "$type": "color" },
+      "info":    { "$value": "#0d9488", "$type": "color", "$description": "Reuses opal-600" }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "sans":  { "$value": "'Outfit', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
+      "mono":  { "$value": "'JetBrains Mono', ui-monospace, monospace", "$type": "fontFamily" }
+    },
+    "fontSize": {
+      "display":  { "$value": "3rem", "$type": "dimension", "$description": "48px — hero headlines" },
+      "headline": { "$value": "2.25rem", "$type": "dimension", "$description": "36px — section titles" },
+      "title-lg": { "$value": "1.75rem", "$type": "dimension", "$description": "28px — page titles" },
+      "title":    { "$value": "1.375rem", "$type": "dimension", "$description": "22px — card titles" },
+      "body-lg":  { "$value": "1.125rem", "$type": "dimension", "$description": "18px — lead paragraphs" },
+      "body":     { "$value": "1rem", "$type": "dimension", "$description": "16px — default body" },
+      "callout":  { "$value": "1rem", "$type": "dimension", "$description": "16px, weight 500" },
+      "subhead":  { "$value": "0.875rem", "$type": "dimension", "$description": "14px — labels" },
+      "footnote": { "$value": "0.8125rem", "$type": "dimension", "$description": "13px — secondary" },
+      "caption":  { "$value": "0.75rem", "$type": "dimension", "$description": "12px — metadata" }
+    },
+    "fontWeight": {
+      "display":  { "$value": "600", "$type": "number" },
+      "headline": { "$value": "600", "$type": "number" },
+      "title-lg": { "$value": "500", "$type": "number" },
+      "title":    { "$value": "500", "$type": "number" },
+      "body-lg":  { "$value": "400", "$type": "number" },
+      "body":     { "$value": "400", "$type": "number" },
+      "callout":  { "$value": "500", "$type": "number" },
+      "subhead":  { "$value": "500", "$type": "number" },
+      "footnote": { "$value": "400", "$type": "number" },
+      "caption":  { "$value": "400", "$type": "number" }
+    },
+    "lineHeight": {
+      "display":  { "$value": "1.1", "$type": "number" },
+      "headline": { "$value": "1.15", "$type": "number" },
+      "title-lg": { "$value": "1.2", "$type": "number" },
+      "title":    { "$value": "1.25", "$type": "number" },
+      "body-lg":  { "$value": "1.6", "$type": "number" },
+      "body":     { "$value": "1.6", "$type": "number" },
+      "callout":  { "$value": "1.5", "$type": "number" },
+      "subhead":  { "$value": "1.5", "$type": "number" },
+      "footnote": { "$value": "1.45", "$type": "number" },
+      "caption":  { "$value": "1.4", "$type": "number" }
+    },
+    "letterSpacing": {
+      "display":  { "$value": "-0.02em", "$type": "dimension" },
+      "headline": { "$value": "-0.015em", "$type": "dimension" },
+      "title-lg": { "$value": "-0.01em", "$type": "dimension" },
+      "title":    { "$value": "-0.005em", "$type": "dimension" },
+      "body-lg":  { "$value": "0", "$type": "dimension" },
+      "body":     { "$value": "0", "$type": "dimension" },
+      "callout":  { "$value": "0", "$type": "dimension" },
+      "subhead":  { "$value": "0.01em", "$type": "dimension" },
+      "footnote": { "$value": "0.01em", "$type": "dimension" },
+      "caption":  { "$value": "0.02em", "$type": "dimension" }
+    }
+  },
+  "spacing": {
+    "0.5": { "$value": "2px", "$type": "dimension" },
+    "1":   { "$value": "4px", "$type": "dimension" },
+    "1.5": { "$value": "6px", "$type": "dimension" },
+    "2":   { "$value": "8px", "$type": "dimension" },
+    "3":   { "$value": "12px", "$type": "dimension" },
+    "4":   { "$value": "16px", "$type": "dimension" },
+    "6":   { "$value": "24px", "$type": "dimension" },
+    "8":   { "$value": "32px", "$type": "dimension" },
+    "10":  { "$value": "40px", "$type": "dimension" },
+    "12":  { "$value": "48px", "$type": "dimension" },
+    "16":  { "$value": "64px", "$type": "dimension" },
+    "24":  { "$value": "96px", "$type": "dimension" },
+    "32":  { "$value": "128px", "$type": "dimension" }
+  },
+  "radii": {
+    "xs":   { "$value": "2px", "$type": "dimension" },
+    "sm":   { "$value": "4px", "$type": "dimension" },
+    "md":   { "$value": "6px", "$type": "dimension" },
+    "lg":   { "$value": "8px", "$type": "dimension", "$description": "Default for cards/buttons" },
+    "xl":   { "$value": "12px", "$type": "dimension" },
+    "full": { "$value": "9999px", "$type": "dimension" }
+  },
+  "shadow": {
+    "xs":   { "$value": "0 1px 2px rgba(28,25,23,0.04)", "$type": "shadow" },
+    "sm":   { "$value": "0 1px 3px rgba(28,25,23,0.06), 0 1px 2px rgba(28,25,23,0.04)", "$type": "shadow" },
+    "md":   { "$value": "0 4px 6px rgba(28,25,23,0.06), 0 2px 4px rgba(28,25,23,0.04)", "$type": "shadow" },
+    "lg":   { "$value": "0 10px 15px rgba(28,25,23,0.06), 0 4px 6px rgba(28,25,23,0.04)", "$type": "shadow" },
+    "xl":   { "$value": "0 20px 25px rgba(28,25,23,0.08), 0 8px 10px rgba(28,25,23,0.04)", "$type": "shadow" },
+    "glow": { "$value": "0 0 20px rgba(86,219,208,0.25)", "$type": "shadow", "$description": "Opal glow for special moments" }
+  }
+}

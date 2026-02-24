@@ -1,0 +1,54 @@
+{
+  "fontFamily": {
+    "sans":  { "$value": "'Outfit', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
+    "mono":  { "$value": "'JetBrains Mono', ui-monospace, monospace", "$type": "fontFamily" }
+  },
+  "fontSize": {
+    "display":  { "$value": "3rem", "$type": "dimension", "$description": "48px — hero headlines" },
+    "headline": { "$value": "2.25rem", "$type": "dimension", "$description": "36px — section titles" },
+    "title-lg": { "$value": "1.75rem", "$type": "dimension", "$description": "28px — page titles" },
+    "title":    { "$value": "1.375rem", "$type": "dimension", "$description": "22px — card titles" },
+    "body-lg":  { "$value": "1.125rem", "$type": "dimension", "$description": "18px — lead paragraphs" },
+    "body":     { "$value": "1rem", "$type": "dimension", "$description": "16px — default body" },
+    "callout":  { "$value": "1rem", "$type": "dimension", "$description": "16px, weight 500" },
+    "subhead":  { "$value": "0.875rem", "$type": "dimension", "$description": "14px — labels" },
+    "footnote": { "$value": "0.8125rem", "$type": "dimension", "$description": "13px — secondary" },
+    "caption":  { "$value": "0.75rem", "$type": "dimension", "$description": "12px — metadata" }
+  },
+  "fontWeight": {
+    "display":  { "$value": "600", "$type": "number" },
+    "headline": { "$value": "600", "$type": "number" },
+    "title-lg": { "$value": "500", "$type": "number" },
+    "title":    { "$value": "500", "$type": "number" },
+    "body-lg":  { "$value": "400", "$type": "number" },
+    "body":     { "$value": "400", "$type": "number" },
+    "callout":  { "$value": "500", "$type": "number" },
+    "subhead":  { "$value": "500", "$type": "number" },
+    "footnote": { "$value": "400", "$type": "number" },
+    "caption":  { "$value": "400", "$type": "number" }
+  },
+  "lineHeight": {
+    "display":  { "$value": "1.1", "$type": "number" },
+    "headline": { "$value": "1.15", "$type": "number" },
+    "title-lg": { "$value": "1.2", "$type": "number" },
+    "title":    { "$value": "1.25", "$type": "number" },
+    "body-lg":  { "$value": "1.6", "$type": "number" },
+    "body":     { "$value": "1.6", "$type": "number" },
+    "callout":  { "$value": "1.5", "$type": "number" },
+    "subhead":  { "$value": "1.5", "$type": "number" },
+    "footnote": { "$value": "1.45", "$type": "number" },
+    "caption":  { "$value": "1.4", "$type": "number" }
+  },
+  "letterSpacing": {
+    "display":  { "$value": "-0.02em", "$type": "dimension" },
+    "headline": { "$value": "-0.015em", "$type": "dimension" },
+    "title-lg": { "$value": "-0.01em", "$type": "dimension" },
+    "title":    { "$value": "-0.005em", "$type": "dimension" },
+    "body-lg":  { "$value": "0", "$type": "dimension" },
+    "body":     { "$value": "0", "$type": "dimension" },
+    "callout":  { "$value": "0", "$type": "dimension" },
+    "subhead":  { "$value": "0.01em", "$type": "dimension" },
+    "footnote": { "$value": "0.01em", "$type": "dimension" },
+    "caption":  { "$value": "0.02em", "$type": "dimension" }
+  }
+}
