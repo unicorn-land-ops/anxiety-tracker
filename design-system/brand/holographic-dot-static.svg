@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!--
+      Static holographic dot — gradient frozen at a position showing
+      opal, blue, purple, and pink (the most visually appealing range).
+      Gradient at 135deg, shifted to ~40% of the animation cycle.
+    -->
+    <linearGradient id="holo-static" gradientUnits="userSpaceOnUse"
+      x1="-12" y1="-12" x2="180" y2="180">
+      <stop offset="0%"    stop-color="#56dbd0"/>
+      <stop offset="16.6%" stop-color="#64b5f6"/>
+      <stop offset="33.3%" stop-color="#ba68c8"/>
+      <stop offset="50%"   stop-color="#f0a4c8"/>
+      <stop offset="66.6%" stop-color="#e8c170"/>
+      <stop offset="83.3%" stop-color="#81c784"/>
+      <stop offset="100%"  stop-color="#56dbd0"/>
+    </linearGradient>
+    <!-- Soft white highlight at top-left for dimensionality -->
+    <radialGradient id="highlight-static" cx="35%" cy="35%" r="50%">
+      <stop offset="0%"  stop-color="white" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Rainbow gradient circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#holo-static)"/>
+  <!-- Highlight overlay -->
+  <circle cx="32" cy="32" r="30" fill="url(#highlight-static)"/>
+</svg>

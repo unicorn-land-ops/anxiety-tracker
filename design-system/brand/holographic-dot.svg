@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <!--
+      Holographic rainbow gradient — replicates CSS:
+      linear-gradient(135deg, colors...) with background-size:300% 300%
+      animating background-position from 0% 50% to 100% 50%
+
+      135deg gradient on 64px box: direction vector is (1, 1)/sqrt(2).
+      At 300% size the gradient spans ~3*90.5 = ~272px along that axis.
+      We animate by shifting the gradient endpoints along the 135deg axis.
+    -->
+    <linearGradient id="holo" gradientUnits="userSpaceOnUse"
+      x1="-64" y1="-64" x2="128" y2="128">
+      <stop offset="0%"    stop-color="#56dbd0"/>
+      <stop offset="16.6%" stop-color="#64b5f6"/>
+      <stop offset="33.3%" stop-color="#ba68c8"/>
+      <stop offset="50%"   stop-color="#f0a4c8"/>
+      <stop offset="66.6%" stop-color="#e8c170"/>
+      <stop offset="83.3%" stop-color="#81c784"/>
+      <stop offset="100%"  stop-color="#56dbd0"/>
+      <!-- Slide gradient endpoints back and forth along 135deg axis -->
+      <animate attributeName="x1"
+        values="-64;64;-64" dur="6s"
+        calcMode="spline"
+        keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+        keyTimes="0;0.5;1"
+        repeatCount="indefinite"/>
+      <animate attributeName="y1"
+        values="-64;64;-64" dur="6s"
+        calcMode="spline"
+        keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+        keyTimes="0;0.5;1"
+        repeatCount="indefinite"/>
+      <animate attributeName="x2"
+        values="128;256;128" dur="6s"
+        calcMode="spline"
+        keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+        keyTimes="0;0.5;1"
+        repeatCount="indefinite"/>
+      <animate attributeName="y2"
+        values="128;256;128" dur="6s"
+        calcMode="spline"
+        keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+        keyTimes="0;0.5;1"
+        repeatCount="indefinite"/>
+    </linearGradient>
+    <!-- Soft white highlight at top-left for dimensionality -->
+    <radialGradient id="highlight" cx="35%" cy="35%" r="50%">
+      <stop offset="0%"  stop-color="white" stop-opacity="0.45"/>
+      <stop offset="60%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Rainbow gradient circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#holo)"/>
+  <!-- Highlight overlay -->
+  <circle cx="32" cy="32" r="30" fill="url(#highlight)"/>
+</svg>
