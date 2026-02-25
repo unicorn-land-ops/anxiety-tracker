@@ -42,7 +42,8 @@ Not a startup, not an agency — an atelier. A small workshop making exceptional
 
 ### Messaging Hierarchy
 
-- **Tagline:** "Making the invisible visible"
+- **Tagline:** "Grass-fed, grass-finished" — the personality line. Homepage, social bios, the memorable thing.
+- **Mission:** "Making the invisible visible" — the substance line. About page, presentations, brand docs.
 - **Value proposition:** Beautifully crafted tools that reveal hidden patterns — in data, in wisdom, in yourself.
 - **Key messages:**
   1. Every product is built with obsessive care.
