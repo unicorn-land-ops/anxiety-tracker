@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inequality Economics — A Systems Thinker's Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap');
+
+        :root {
+            /* Rainbow palette (from homepage) */
+            --rainbow-1: #ff6b9d;
+            --rainbow-2: #ff8a65;
+            --rainbow-3: #ffd54f;
+            --rainbow-4: #81c784;
+            --rainbow-5: #64b5f6;
+            --rainbow-6: #ba68c8;
+
+            /* Opal / teal accent */
+            --accent: #3bb8ad;
+            --accent-light: #56dbd0;
+            --accent-muted: #a8e6e0;
+
+            /* Light mode */
+            --bg-top: #f0e6f4;
+            --bg-mid: #faf0f2;
+            --bg-bottom: #f2f8f6;
+            --text: #2a2a2a;
+            --text-muted: #78716c;
+            --border: #e7e1db;
+            --card-bg: rgba(255, 255, 255, 0.55);
+            --card-border: rgba(255, 255, 255, 0.7);
+            --highlight: rgba(86, 219, 208, 0.08);
+            --highlight-border: rgba(86, 219, 208, 0.5);
+            --link: #2d9f96;
+            --cloud-color: rgba(255, 255, 255, 0.6);
+            --sparkle-color: #fff;
+            --sparkle-glow: #e1bee7;
+            --code-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-top: #1a1025;
+                --bg-mid: #1e1a2e;
+                --bg-bottom: #0d1518;
+                --text: #d4d0ca;
+                --text-muted: #8a8680;
+                --accent: #56dbd0;
+                --accent-light: #7ae8df;
+                --accent-muted: #2a7a74;
+                --border: rgba(255, 255, 255, 0.08);
+                --card-bg: rgba(40, 30, 60, 0.4);
+                --card-border: rgba(100, 80, 150, 0.2);
+                --highlight: rgba(86, 219, 208, 0.06);
+                --highlight-border: rgba(86, 219, 208, 0.35);
+                --link: #7ae8df;
+                --cloud-color: rgba(60, 50, 80, 0.35);
+                --sparkle-color: #e1bee7;
+                --sparkle-glow: #7c4dff;
+                --code-bg: rgba(40, 30, 60, 0.5);
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Source Serif 4', Georgia, serif;
+            background: linear-gradient(180deg,
+                var(--bg-top) 0%,
+                var(--bg-mid) 30%,
+                var(--bg-bottom) 100%
+            );
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.72;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating clouds */
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: var(--cloud-color);
+            border-radius: 100px;
+            filter: blur(2px);
+            animation: float-cloud 80s linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .cloud-1 {
+            width: 100px;
+            height: 32px;
+            top: 6%;
+            left: -130px;
+            animation-duration: 60s;
+        }
+        .cloud-1::before { width: 40px; height: 40px; top: -20px; left: 16px; }
+        .cloud-1::after { width: 28px; height: 28px; top: -12px; left: 50px; }
+
+        .cloud-2 {
+            width: 130px;
+            height: 38px;
+            top: 14%;
+            left: -160px;
+            animation-duration: 80s;
+            animation-delay: -30s;
+        }
+        .cloud-2::before { width: 48px; height: 48px; top: -24px; left: 20px; }
+        .cloud-2::after { width: 36px; height: 36px; top: -14px; left: 72px; }
+
+        @keyframes float-cloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 250px)); }
+        }
+
+        /* Sparkle particles */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .sparkle-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--sparkle-color);
+            border-radius: 50%;
+            animation: float-sparkle 12s ease-in-out infinite;
+            box-shadow: 0 0 6px var(--sparkle-color), 0 0 10px var(--sparkle-glow);
+        }
+
+        @keyframes float-sparkle {
+            0%, 100% { transform: translateY(0) scale(0.6); opacity: 0.1; }
+            50% { transform: translateY(-12px) scale(1); opacity: 0.5; }
+        }
+
+        /* Content layer */
+        .reading-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 6rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .doc-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-header .label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg,
+                var(--rainbow-1),
+                var(--rainbow-2),
+                var(--rainbow-3),
+                var(--rainbow-4),
+                var(--rainbow-5),
+                var(--rainbow-6)
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 6s ease infinite;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg,
+                var(--rainbow-1),
+                var(--rainbow-2),
+                var(--rainbow-3),
+                var(--rainbow-4),
+                var(--rainbow-5),
+                var(--rainbow-6)
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 6s ease infinite;
+        }
+
+        @keyframes rainbow-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .doc-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .toc h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .toc ol {
+            padding-left: 1.25rem;
+        }
+
+        .toc li {
+            margin-bottom: 0.35rem;
+            font-size: 0.95rem;
+        }
+
+        .toc a {
+            color: var(--link);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .toc a:hover { border-bottom-color: var(--link); }
+
+        /* Headings */
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin: 3rem 0 1rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+            color: var(--accent);
+        }
+
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        /* Paragraphs */
+        p {
+            margin-bottom: 1.15rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 1.15rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        li ul, li ol {
+            margin-top: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Emphasis */
+        strong { font-weight: 600; }
+
+        em { font-style: italic; }
+
+        /* Callout boxes */
+        .callout {
+            background: var(--highlight);
+            border-left: 3px solid var(--highlight-border);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .callout p:last-child { margin-bottom: 0; }
+
+        /* Separator */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.5rem 0;
+        }
+
+        /* Loop diagrams (text-based) */
+        .loop-diagram {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: var(--code-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            margin: 1.25rem 0;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* Book list */
+        .book-entry {
+            margin-bottom: 1.5rem;
+            padding-left: 0;
+        }
+
+        .book-entry .book-title {
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .book-entry .book-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .doc-footer .footer-brand {
+            display: inline-block;
+            background: linear-gradient(135deg,
+                var(--rainbow-1),
+                var(--rainbow-2),
+                var(--rainbow-3),
+                var(--rainbow-4),
+                var(--rainbow-5),
+                var(--rainbow-6)
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 6s ease infinite;
+            font-weight: 600;
+        }
+
+        /* Reading progress — rainbow gradient */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                var(--rainbow-1),
+                var(--rainbow-2),
+                var(--rainbow-3),
+                var(--rainbow-4),
+                var(--rainbow-5),
+                var(--rainbow-6)
+            );
+            z-index: 100;
+            transition: width 0.1s;
+            width: 0%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            html { font-size: 17px; }
+            .reading-container { padding: 2rem 1.25rem 4rem; }
+            h1 { font-size: 1.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <!-- Floating clouds -->
+    <div class="clouds">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+    </div>
+
+    <!-- Sparkle particles -->
+    <div class="sparkles">
+        <div class="sparkle-dot" style="top: 8%; left: 15%; animation-delay: 0s;"></div>
+        <div class="sparkle-dot" style="top: 18%; left: 82%; animation-delay: 2s;"></div>
+        <div class="sparkle-dot" style="top: 35%; left: 6%; animation-delay: 4s;"></div>
+        <div class="sparkle-dot" style="top: 55%; left: 90%; animation-delay: 6s;"></div>
+        <div class="sparkle-dot" style="top: 75%; left: 22%; animation-delay: 8s;"></div>
+    </div>
+
+    <article class="reading-container">
+        <header class="doc-header">
+            <div class="label">Unicorn.Land / Internal Reading</div>
+            <h1>Inequality Economics</h1>
+            <div class="subtitle">A guide for systems thinkers who want to understand where value leaks, who captures it, and what the structural dynamics actually are.</div>
+        </header>
+
+        <nav class="toc">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#what">What inequality economics actually is</a></li>
+                <li><a href="#thinkers">The people who mapped this</a></li>
+                <li><a href="#mechanisms">How inequality reproduces itself</a></li>
+                <li><a href="#systems">The systems view</a></li>
+                <li><a href="#numbers">What the data says</a></li>
+                <li><a href="#structure">The rules that shape distribution</a></li>
+                <li><a href="#levers">Policy levers and what works</a></li>
+                <li><a href="#opportunity">Where this creates opportunity</a></li>
+                <li><a href="#contested">Where the field is contested</a></li>
+                <li><a href="#reading">What to read next</a></li>
+            </ol>
+        </nav>
+
+        <!-- Section 1 -->
+        <section id="what">
+            <h2>1. What inequality economics actually is</h2>
+
+            <p>Standard economics treats distribution as a secondary concern. The primary questions are about growth, efficiency, and equilibrium. Markets clear. Prices reflect value. If someone earns more, that means they produced more. Inequality is either a temporary friction or a necessary incentive.</p>
+
+            <p>Inequality economics starts from a different premise: distribution is not a byproduct of the system. It is the system. The rules that determine who gets what are not neutral background conditions. They are designed, maintained, and enforced by people who benefit from them.</p>
+
+            <p>Where neoclassical economics sees a price mechanism that tends toward equilibrium, inequality economics sees reinforcing feedback loops that concentrate wealth and power unless something actively counteracts them. Where standard theory assumes competitive markets, inequality economics examines the ways real markets deviate from competition and who benefits from those deviations.</p>
+
+            <div class="callout">
+                <p><strong>The core reframe for a systems thinker:</strong> Inequality is not an equilibrium state that the economy settles into. It is a self-amplifying dynamic. Left uninterrupted, the system does not correct itself. It accelerates.</p>
+            </div>
+
+            <p>A few key definitions to anchor things:</p>
+            <ul>
+                <li><strong>Rent-seeking</strong> — investing in influence (lobbying, barriers to entry, regulatory complexity) rather than production. Returns flow from power, not value creation.</li>
+                <li><strong>Regulatory capture</strong> — when the institutions designed to check industry power end up serving it instead. A balancing loop that gets converted into a reinforcing loop.</li>
+                <li><strong>Predistribution</strong> — shaping market rules so outcomes are fairer before taxes and transfers. Turns out this matters more than redistribution.</li>
+                <li><strong>Extractive institutions</strong> — systems designed to concentrate wealth and power in the hands of a few, at the expense of the many.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Section 2 -->
+        <section id="thinkers">
+            <h2>2. The people who mapped this</h2>
+
+            <h3>Thomas Piketty</h3>
+            <p>French economist. Assembled two centuries of tax data across twenty countries. His central finding: the rate of return on capital (r) tends to exceed the rate of economic growth (g). When r &gt; g, wealth concentrates mechanically over time. No conspiracy needed. No market failure required. The math does it on its own.</p>
+            <p>His later work, <em>Capital and Ideology</em>, argues that every society constructs a narrative that justifies its inequality regime. The ideology is the operating system. Change the ideology, change the distribution.</p>
+
+            <h3>Joseph Stiglitz</h3>
+            <p>Nobel laureate. His contribution is the most directly operational for someone thinking about systems: much of today's inequality reflects not differences in productivity but differences in the ability to extract rents. Monopoly power, information asymmetry, and political influence allow certain actors to capture value they did not create. He showed that markets with imperfect information do not behave the way textbook models predict.</p>
+
+            <h3>Daron Acemoglu &amp; James Robinson</h3>
+            <p>Won the 2024 Nobel for their work on institutions. Their framework: nations succeed or fail based on whether their institutions are <em>inclusive</em> (broadly shared access to economic and political power) or <em>extractive</em> (concentrated power used to siphon value). The feedback loops between political institutions and economic institutions create either virtuous or vicious cycles. Once you are in an extractive equilibrium, it is very hard to escape without a shock to the system.</p>
+
+            <h3>Branko Milanovic</h3>
+            <p>Created the "elephant curve" — a graph showing who gained and who lost from globalization between 1988 and 2008. The global middle class (mostly in Asia) gained substantially. The global rich gained enormously. The lower-middle class in wealthy countries gained almost nothing. This single chart explains much of the political upheaval of the last decade.</p>
+
+            <h3>Mariana Mazzucato</h3>
+            <p>Drew the line between value creation and value extraction. Her argument: much of what the financial sector, pharma, and big tech call "innovation" is actually rent collection enabled by public investment. The state funds the risky early research (the internet, GPS, most pharmaceutical breakthroughs), the private sector enters after risk is reduced, and then the returns are privatized. The language of "value creation" is used to justify extraction.</p>
+
+            <h3>Raj Chetty</h3>
+            <p>Used 20 million anonymized tax records to build the most detailed picture of economic mobility in the United States. Key finding: 90% of children born in 1940 grew up to earn more than their parents. For children born in 1980, only about 50% did. The fading American dream, measured precisely. He also showed that where you grow up matters enormously — neighborhood effects explain about 60% of the variation in outcomes.</p>
+
+            <h3>Gabriel Zucman</h3>
+            <p>Mapped the world's hidden wealth. Roughly 8% of global household financial wealth sits in tax havens, invisible to governments. You cannot tax what you cannot see, and you cannot build a balancing loop around a stock you do not measure. His work with Emmanuel Saez showed that the U.S. tax system has become effectively regressive at the very top — billionaires pay a lower effective rate than the middle class.</p>
+
+            <h3>Anthony Atkinson</h3>
+            <p>The field's elder statesman before his death in 2017. His final book was the most concrete: fifteen specific proposals to reduce inequality, from capital endowments for every young adult to technology policy that directs innovation toward inclusive employment. His core message: inequality is not inevitable. It is a choice.</p>
+
+            <h3>Ha-Joon Chang</h3>
+            <p>Showed that virtually every wealthy nation industrialized behind protectionist walls — tariffs, subsidies, infant industry protection — and then, once successful, insisted that developing countries adopt free markets. The metaphor: kicking away the ladder after you have climbed it.</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 3 -->
+        <section id="mechanisms">
+            <h2>3. How inequality reproduces itself</h2>
+
+            <p>If you had to draw the master diagram of inequality as a system, it would have one dominant reinforcing loop at its center:</p>
+
+            <div class="loop-diagram">Wealth ──► Political influence ──► Favorable rules ──► More wealth
+  ▲                                                         │
+  └─────────────────────────────────────────────────────────┘</div>
+
+            <p>Every specific mechanism feeds into this loop. Here are the major ones.</p>
+
+            <h3>Capital accumulation (r &gt; g)</h3>
+            <p>Capital generates returns. Returns get reinvested. The stock grows exponentially when r exceeds g. Those starting with more capital accumulate disproportionately more, even without any manipulation. Pure mathematical compounding. This is sometimes called the Matthew Effect — to those who have, more is given.</p>
+
+            <h3>Rent-seeking</h3>
+            <p>Economic actors invest in influence rather than production. Lobbying for favorable regulation, creating barriers to entry, shaping tax policy, securing government contracts. Rent-seeking is individually rational but collectively destructive — a tragedy-of-the-commons dynamic applied to the political system.</p>
+
+            <h3>Regulatory capture</h3>
+            <p>Regulators are supposed to constrain industry. In practice, they often end up serving it. The reasons are structural: regulated firms have concentrated interests and resources; the public has diffuse interests. There is deep information asymmetry — regulators depend on the industry they regulate for technical knowledge. The revolving door ensures that regulators and industry share personnel, culture, and worldview.</p>
+
+            <div class="callout">
+                <p><strong>Systems frame:</strong> Regulatory capture is what happens when a balancing loop (regulation) gets converted into a reinforcing loop (regulation that amplifies incumbent advantage). The structure still looks like a check on power, but the behavior amplifies it.</p>
+            </div>
+
+            <h3>Information asymmetry</h3>
+            <p>Those with wealth can afford better information — legal, financial, tax — which generates more wealth. Access to sophisticated tax planning, earlier access to investment opportunities, better legal representation, proprietary market data. Information advantage compounds just like capital.</p>
+
+            <h3>Network effects and winner-take-all markets</h3>
+            <p>Platform economics creates natural monopolies. Once a platform reaches critical mass, it becomes nearly impossible to displace. The dominant platform captures most of the market's value. The returns accrue to a tiny number of winners. Though it is worth noting that winner-take-all is not permanent — previous dominant platforms have fallen.</p>
+
+            <h3>Intergenerational transmission</h3>
+            <p>Advantage crosses generations through multiple channels: direct wealth transfer, human capital investment, social networks and cultural knowledge, assortative mating (high-income people increasingly marry each other), and neighborhood effects. Researchers identify three distinct wealth classes with different transmission mechanisms: material wealth (bequests), relational wealth (networks), and embodied wealth (skills and knowledge).</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 4 -->
+        <section id="systems">
+            <h2>4. The systems view</h2>
+
+            <p>If you know Donella Meadows' twelve leverage points, inequality economics maps onto them cleanly. This is probably the most useful framing for how you think.</p>
+
+            <h3>Stock-flow dynamics</h3>
+            <p>Think of the economy as a bathtub system. Wealth is a stock. Income is a flow. The stock fills from inflows (income, capital gains, inheritance) and drains from outflows (spending, taxes, depreciation).</p>
+            <p>For the wealthy, inflows massively exceed outflows, so the stock rises. For the poor, outflows often exceed inflows, depleting the stock. The critical system behavior: the rate of inflow increases with stock size. More wealth means more capital income, which creates exponential growth above a threshold and stagnation or decline below it.</p>
+            <p>Most policy debates focus on income (flow) when wealth (stock) is where power and persistence reside. Taxing flows while ignoring stocks is like trying to drain a bathtub by slowing the faucet while the drain is plugged.</p>
+
+            <h3>Leverage points, applied</h3>
+
+            <h4>Weakest: Parameters (Level 12)</h4>
+            <p>Adjusting tax rates by a few points, tweaking the minimum wage. These matter, but the system routes around them.</p>
+
+            <h4>Buffers (Level 11)</h4>
+            <p>Social safety nets, emergency savings, public housing stock. They absorb shocks but do not change system behavior.</p>
+
+            <h4>Delays (Level 9-10)</h4>
+            <p>The effects of childhood poverty on adult outcomes play out over 20-30 years. This makes causal connections politically invisible. By the time the damage is measurable, nobody remembers what caused it. Delay-induced blindness is one of the most important structural features of inequality as a system.</p>
+
+            <h4>Balancing feedback loops (Level 8)</h4>
+            <p>Progressive taxation, antitrust enforcement, labor protections. These are designed to slow the reinforcing loop of wealth concentration. When they are weakened — through tax cuts, loopholes, lax enforcement — the reinforcing loops dominate unchecked.</p>
+
+            <h4>Reinforcing feedback loops (Level 7)</h4>
+            <p>The wealth-to-power-to-rules-to-wealth loop. The education-to-income-to-better-education loop. Network effects in platform markets. These are the engines. Interventions here are far more powerful than parameter adjustments.</p>
+
+            <h4>Information flows (Level 6)</h4>
+            <p>Zucman's hidden wealth, Chetty's mobility data, Saez's tax data — making invisible flows visible is one of the highest-leverage interventions available. You cannot build a balancing loop around a stock you do not measure.</p>
+
+            <h4>Rules of the system (Level 5-4)</h4>
+            <p>IP law, corporate governance, financial regulation. Who writes the rules, and who benefits from them. Regulatory capture means the actors who benefit from the rules also shape them — a deeply problematic reinforcing loop at the structural level.</p>
+
+            <h4>Goals (Level 3)</h4>
+            <p>Neoclassical economics optimizes for GDP growth. Inequality economics argues for broader goals: mobility, well-being, sustainability. The shareholder primacy vs. stakeholder capitalism debate lives here.</p>
+
+            <h4>Paradigm (Level 2)</h4>
+            <p>The belief that markets are naturally efficient and that inequality reflects merit. This is not a finding. It is an operating assumption that determines which questions get asked and which evidence gets attention. Piketty's <em>Capital and Ideology</em> operates at this level: every society constructs a narrative that justifies its inequality regime.</p>
+
+            <h4>Transcending paradigms (Level 1)</h4>
+            <p>The ability to see all paradigms as mental models rather than truth. This is what a systems thinker brings: the capacity to see that "the free market" and "the welfare state" are both designed systems with particular properties, not natural laws.</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 5 -->
+        <section id="numbers">
+            <h2>5. What the data says</h2>
+
+            <h3>Wealth concentration</h3>
+            <ul>
+                <li>The top 1% in the U.S. holds 40.5% of national wealth — far more than other OECD countries.</li>
+                <li>The top 1% owns half the stock market. The bottom 50% owns 1.1%.</li>
+                <li>The top 0.1% share rose from 7% in 1979 to roughly 22% by 2012 — approaching 1929 levels.</li>
+                <li>Between 1989 and 2022, a top 0.1% household gained $39.5 million. A bottom 20% household gained less than $8,500.</li>
+                <li>The share of national income going to the top 1% doubled between 1980 and 2022. The share going to the bottom 50% decreased by one-third.</li>
+            </ul>
+
+            <h3>Global picture</h3>
+            <ul>
+                <li>The richest 1% of people own nearly 45% of all global wealth.</li>
+                <li>Billionaire wealth grew by $2 trillion in 2024 alone — roughly $5.7 billion per day.</li>
+                <li>For the first time in 2024, more billionaires were created through inheritance than entrepreneurship.</li>
+                <li>60% of billionaire wealth comes from crony or corrupt sources, monopoly power, or inheritance.</li>
+                <li>44% of humanity lives below the World Bank poverty line of $6.85 per day.</li>
+            </ul>
+
+            <h3>The Great Gatsby Curve</h3>
+            <p>One of the most robust empirical relationships in the field: countries with higher inequality have lower intergenerational mobility. Named by Alan Krueger in 2012, documented by Miles Corak. Nordic countries sit at the bottom-left (low inequality, high mobility). The U.S. sits at the top-right (high inequality, low mobility). Your parents' income predicts your income more strongly in the U.S. than in Denmark, Canada, Germany, France, or Australia.</p>
+
+            <h3>The fading American dream</h3>
+            <p>Chetty's data: 90% of children born in 1940 out-earned their parents. Only about 50% of those born in 1980 did. The decline is driven primarily by the distribution of growth, not the rate of growth. The economy grew. The growth just went to fewer people.</p>
+
+            <h3>The elephant curve</h3>
+            <p>Milanovic's chart of global income gains from 1988 to 2008 shows who won from globalization: the global middle class (mostly Asia) gained 60-70%. The global rich gained enormously. The lower-middle class in wealthy countries — the 75th-90th percentile of the global distribution — gained almost nothing. That flat section of the curve maps to the working and lower-middle classes of Europe and North America, and it maps to a lot of political anger.</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 6 -->
+        <section id="structure">
+            <h2>6. The rules that shape distribution</h2>
+
+            <p>Markets are not natural phenomena. They are designed systems with rules that determine who benefits. Every market has entry requirements, information rules, transaction rules, and enforcement mechanisms. Each design choice has distributional consequences. The appearance of neutrality masks embedded advantages.</p>
+
+            <h3>Intellectual property</h3>
+            <p>Patents create temporary monopolies by design. Patent arsenals help large firms while impeding smaller ones. The TRIPS agreement globalizes these monopoly rents, creating financial flows from poorer to richer nations. Pharmaceutical patents can exclude competitors for decades, and voluntary licenses routinely exclude middle-income countries where disease burden is highest. IP law is perhaps the clearest example of market rules designed to concentrate returns.</p>
+
+            <h3>Financial system architecture</h3>
+            <p>Complex financial instruments disproportionately benefit those with capital and sophistication. Tax code complexity functions as a regressive tax — those who can afford accountants navigate it, those who cannot subsidize those who can. Offshore financial architecture enables roughly 8% of global household wealth to avoid taxation entirely.</p>
+
+            <h3>Platform economics</h3>
+            <p>Network effects create natural monopoly tendencies. Two-sided markets tend toward winner-take-all outcomes. Lock-in makes competition extremely difficult. The value captured by platforms often comes from users, suppliers, and workers who generated it — value extraction at scale, dressed up as innovation.</p>
+
+            <div class="callout">
+                <p><strong>The key insight:</strong> Predistribution — the rules that shape market outcomes before taxes and transfers — explains approximately 80% of cross-country variations in post-tax income inequality. The market rules matter far more than the redistribution layered on top.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- Section 7 -->
+        <section id="levers">
+            <h2>7. Policy levers and what works</h2>
+
+            <h3>Progressive taxation</h3>
+            <p>Taxes and transfers both reduce inequality, but with large variation. Transfers tend to be more redistributive than taxes. The Nordic countries demonstrate that high progressive taxation is compatible with strong economic performance. But progressive taxation remains the global exception, not the norm.</p>
+
+            <h3>Wealth taxes</h3>
+            <p>Historically difficult to implement: administrative challenges, capital flight, valuation problems. Several European countries have abandoned them. Zucman's proposed global wealth tax and Piketty's similar proposal try to address the flight problem by making evasion harder. The theoretical case is strong, but the practical record is mixed.</p>
+
+            <h3>Predistribution</h3>
+            <p>This is the big one. Shaping market rules so outcomes are fairer before taxes. Labor law, corporate governance, antitrust, education access, IP reform. Since predistribution explains 80% of cross-country inequality differences, this is where the highest leverage sits. Changing the rules of the game matters more than compensating for the score after the game is played.</p>
+
+            <h3>Antitrust and competition policy</h3>
+            <p>Market concentration raises consumer prices, reduces wages, and shifts income from workers and consumers to shareholders. Monopoly power is regressive: it transfers wealth upward. Labor market monopsony suppresses wages broadly. Reinvigorated antitrust is one of the most promising levers — it directly attacks the reinforcing loop of market power.</p>
+
+            <h3>Universal basic income</h3>
+            <p>Evidence is mixed. Some pilots show gains in entrepreneurship, health, and financial stability. Others show modest work reductions. No pilot has been truly universal — all were temporary and targeted. The debate remains unresolved, partly because program designs vary too much to compare cleanly.</p>
+
+            <h3>Atkinson's proposals</h3>
+            <p>Worth knowing because they are the most concrete policy menu in the field: a capital endowment paid to every young adult, restored social insurance, technology policy directed toward inclusive employment, and Official Development Assistance raised to 1% of GDP.</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 8 -->
+        <section id="opportunity">
+            <h2>8. Where this creates opportunity</h2>
+
+            <p>Inequality economics reveals a recurring pattern that matters for Unicorn.Land: incumbents extract value through complexity. This creates entrepreneurial opportunity.</p>
+
+            <p>Wherever there is a large gap between what something costs to produce and what consumers pay, you will often find complexity-as-moat rather than genuine value creation. The spread is maintained through regulatory barriers, information asymmetry, contractual complexity, bundling, and switching costs.</p>
+
+            <p>The entrepreneurial move is to close that spread. Build something that makes the complexity transparent, reduces the intermediation, and gives operators and households the leverage that incumbents have been denying them. The profit comes from eliminating artificial complexity while capturing a fair share of the value you unlock.</p>
+
+            <h3>Where the spreads are widest</h3>
+            <ul>
+                <li><strong>Financial services</strong> — fees, opaque pricing, bundled products. Fintech has been compressing these spreads successfully for a decade.</li>
+                <li><strong>Healthcare</strong> — pharmaceutical pricing, insurance complexity, information asymmetry. Enormous spread between cost of delivery and price charged.</li>
+                <li><strong>Legal services</strong> — legal complexity as a barrier to justice. Contract automation, dispute resolution, and access tools attack this directly.</li>
+                <li><strong>Education</strong> — the gap between the cost of delivering knowledge and the price of credentialing. Alternative credentialing and skill-based hiring compress the spread.</li>
+                <li><strong>Real estate</strong> — transaction costs, agent commissions, opaque pricing.</li>
+            </ul>
+
+            <p>Understanding inequality economics gives you a structural advantage: you can see where value is being extracted rather than created, and build businesses that redirect value to underserved populations while capturing a portion of the spread. This is not philanthropy. It is recognizing that incumbents' complexity-moats are inefficiencies that represent business opportunity.</p>
+        </section>
+
+        <hr>
+
+        <!-- Section 9 -->
+        <section id="contested">
+            <h2>9. Where the field is contested</h2>
+
+            <h3>The productivity defense</h3>
+            <p>Gregory Mankiw's counterargument: high incomes reflect high productivity and contribution. Redistribution reduces incentives. When you cut the pie into more equal slices, the pie shrinks. The relevant question is whether high incomes reflect genuine market value or market imperfections. This is the strongest mainstream objection, and it has real force for some portion of top incomes.</p>
+
+            <h3>Critiques of Piketty</h3>
+            <p>Some empirical work finds no evidence that inequality responds to r-minus-g shocks in the way Piketty predicts across a majority of countries examined. The composition of capital and who holds it matters — much depends on whether capital is productive investment or rent extraction. The global wealth tax proposal is dismissed as politically infeasible by many economists.</p>
+
+            <h3>The growth tradeoff</h3>
+            <p>Traditional argument: redistribution reduces growth by weakening incentives. IMF research has increasingly challenged this, finding that more equal societies tend to have more sustained growth. The Nordic countries are the strongest counterexample. Critics respond that Nordic success depends on cultural factors and small populations that do not generalize.</p>
+
+            <h3>Measurement problems</h3>
+            <p>Consumption inequality is lower than income inequality. Cost-of-living adjustments, non-monetary benefits, and government transfers complicate raw comparisons. Global poverty has declined dramatically since 1990. Critics argue absolute poverty reduction is the more important story than within-country inequality.</p>
+
+            <h3>Where it is genuinely unresolved</h3>
+            <ul>
+                <li>How much inequality is "optimal"? Almost no serious economist argues for perfect equality, but there is no consensus on where the line falls.</li>
+                <li>Wealth taxes — workable or not? Strong theoretical case, difficult practical record.</li>
+                <li>Globalization's net effect — probably net-positive for the global poor, but the political consequences of ignoring domestic losers have been severe.</li>
+                <li>Technology — is it an exogenous force driving inequality, or are its effects shaped by policy and institutional context?</li>
+                <li>Culture vs. structure — how much do norms and attitudes explain, vs. rules and power?</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <!-- Section 10 -->
+        <section id="reading">
+            <h2>10. What to read next</h2>
+
+            <p>Ordered by priority for someone who thinks in systems.</p>
+
+            <div class="book-entry">
+                <p><span class="book-title">Thinking in Systems</span> — Donella Meadows (2008)<br>
+                <span class="book-meta">Start here if you have not read it. The leverage points framework is directly applicable to everything below.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Why Nations Fail</span> — Daron Acemoglu &amp; James Robinson (2012)<br>
+                <span class="book-meta">The institutional framework. Extractive vs. inclusive institutions. The best entry point for understanding how rules create outcomes. Think of it as the system-structure layer.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Capital in the Twenty-First Century</span> — Thomas Piketty (2013)<br>
+                <span class="book-meta">The foundational text. 200+ years of data. The r &gt; g framework. Dense but essential. Start with the introduction and Part Three if time is short.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">The Price of Inequality</span> — Joseph Stiglitz (2012)<br>
+                <span class="book-meta">How rent-seeking, information asymmetry, and political capture sustain inequality. The most direct treatment of inequality as systemic dysfunction.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">The Value of Everything</span> — Mariana Mazzucato (2018)<br>
+                <span class="book-meta">Value creation vs. value extraction. How finance, pharma, and big tech blur the line between making and taking. Pairs with her earlier <em>The Entrepreneurial State</em>.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Global Inequality</span> — Branko Milanovic (2016)<br>
+                <span class="book-meta">The elephant curve in full context. Best treatment of how globalization reshuffled world incomes and created political volatility.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Inequality: What Can Be Done?</span> — Anthony Atkinson (2015)<br>
+                <span class="book-meta">The most concrete and actionable policy book. Fifteen specific proposals. His capstone argument that inequality is a choice.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">The Hidden Wealth of Nations</span> — Gabriel Zucman (2015)<br>
+                <span class="book-meta">Short book. Maps the offshore financial system. Quantifies what is hidden and why it matters. Essential for the information-flows leverage point.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">The Triumph of Injustice</span> — Emmanuel Saez &amp; Gabriel Zucman (2019)<br>
+                <span class="book-meta">U.S.-specific. How the tax system became regressive at the top. Proposes concrete reforms.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Kicking Away the Ladder</span> — Ha-Joon Chang (2002)<br>
+                <span class="book-meta">How wealthy nations industrialized behind protectionism, then imposed free-market rules on developing countries.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">Capitalism, Alone</span> — Branko Milanovic (2019)<br>
+                <span class="book-meta">Two varieties of capitalism competing globally. The systems-level view of where global capitalism is heading.</span></p>
+            </div>
+
+            <div class="book-entry">
+                <p><span class="book-title">The Great Reversal</span> — Thomas Philippon (2019)<br>
+                <span class="book-meta">How U.S. markets became less competitive while European markets became more so. The antitrust and competition angle.</span></p>
+            </div>
+
+            <h3>Key papers</h3>
+            <ul>
+                <li><strong>Saez &amp; Zucman</strong>, "Wealth Inequality in the United States since 1913" (2014) — the empirical backbone for U.S. wealth concentration data.</li>
+                <li><strong>Lakner &amp; Milanovic</strong>, "Global Income Distribution" (2013) — the original elephant curve paper.</li>
+                <li><strong>Chetty et al.</strong>, "The Opportunity Atlas" (2018) — neighborhood-level mobility data for the entire U.S.</li>
+                <li><strong>Mankiw</strong>, "Defending the One Percent" (2013) — the best articulation of the counterargument. Worth reading to steel-man the other side.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2>Mental models to carry forward</h2>
+
+            <ol>
+                <li><strong>Inequality as reinforcing loop, not equilibrium.</strong> The system does not self-correct. It accelerates.</li>
+                <li><strong>Stock vs. flow confusion.</strong> Most debates focus on income (flow) when wealth (stock) is where power lives.</li>
+                <li><strong>The rules are the system.</strong> Predistribution explains 80% of distributional outcomes. Changing rules beats compensating for bad ones.</li>
+                <li><strong>Delay-induced blindness.</strong> 20-30 year delays between cause and effect make causal chains politically invisible.</li>
+                <li><strong>Converted balancing loops.</strong> Regulatory capture turns checks on power into amplifiers of it.</li>
+                <li><strong>Information as leverage.</strong> Making invisible flows visible is one of the highest-return interventions.</li>
+                <li><strong>The paradigm trap.</strong> "Markets are efficient and inequality is earned" is not a finding. It is an assumption that determines which questions get asked.</li>
+            </ol>
+        </section>
+
+        <footer class="doc-footer">
+            <p>Made in <span class="footer-brand">Unicorn.Land</span> &middot; February 2026</p>
+        </footer>
+    </article>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+    </script>
+</body>
+</html>
