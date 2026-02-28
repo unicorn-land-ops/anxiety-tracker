@@ -60,6 +60,8 @@ function App() {
 
   return (
     <div className="app">
+      {/* @ts-expect-error Web Component */}
+      <unicorn-footer style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 10 }} />
       {view === 'home' && (
         <ScenarioSelector
           onSelect={handleScenarioSelect}
